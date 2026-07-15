@@ -1,0 +1,5 @@
+.idea/
+.godot/
+bin\
+*.import
+Directory.Build.props

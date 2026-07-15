@@ -1,5 +1,0 @@
-D:\Documents\Slay the Spire Modding\Mods\Northman\bin\ExportRelease\net9.0\publish\Northman.dll
-D:\Documents\Slay the Spire Modding\Mods\Northman\bin\ExportRelease\net9.0\publish\Northman.pdb
-D:\Documents\Slay the Spire Modding\Mods\Northman\bin\ExportRelease\net9.0\publish\GodotSharp.dll
-D:\Documents\Slay the Spire Modding\Mods\Northman\bin\ExportRelease\net9.0\publish\GodotSharpEditor.dll
-D:\Documents\Slay the Spire Modding\Mods\Northman\bin\ExportRelease\net9.0\publish\Northman.deps.json

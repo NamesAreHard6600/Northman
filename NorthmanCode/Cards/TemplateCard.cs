@@ -14,6 +14,7 @@ public class TemplateCard : NorthmanCard
 {
     public TemplateCard() : base(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
     {
+        // THIS NEED UPDATE
         WithDamage(6, 3);
         WithTags(CardTag.Strike);
     }

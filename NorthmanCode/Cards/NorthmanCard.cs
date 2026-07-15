@@ -1,11 +1,15 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using Northman.NorthmanCode.Character;
 using Northman.NorthmanCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using Northman.NorthmanCode.Cards.Token;
 using Northman.NorthmanCode.CustomEnums;
 
 namespace Northman.NorthmanCode.Cards;
@@ -38,6 +42,25 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
         this.WithKeyword(NorthmanKeyword.Rage);
         return this;
     }
-    
-    
+
+    protected NorthmanCard WithInvoke(int invoke, int upgrade = 0)
+    {
+        this.WithKeyword(NorthmanKeyword.Invoke);
+        WithVar("Invoke", invoke, upgrade);
+        return this;
+    }
+
+    protected async Task AddRageCard<T>(
+        PlayerChoiceContext ctx,
+        CardPlay cardPlay) where T : NorthmanRageCard
+    {
+        NorthmanCard source = this;
+        if (CombatState == null) return;
+        
+        NorthmanRageCard card = CombatState.CreateCard<T>(cardPlay.Card.Owner);
+        if (source.IsUpgraded)
+            CardCmd.Upgrade(card);
+        
+        await NorthmanCmd.AddCard(ctx, card);
+    }
 }

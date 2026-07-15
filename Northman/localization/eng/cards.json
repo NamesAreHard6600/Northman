@@ -4,6 +4,13 @@
   "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.description": "Deal {Damage:diff()} Damage.",
   "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.title": "Strike",
   
+    
+  
   "NORTHMAN-TEMPLATE_CARD.description": "This card is just a strike but won't exist later",
-  "NORTHMAN-TEMPLATE_CARD.title": "TemplateCard"
+  "NORTHMAN-TEMPLATE_CARD.title": "Template Card",
+  
+  "NORTHMAN-INVOKE_TEST_CARD.description": "[rage]Rage: Invoke {Invoke:diff()}.[/rage]",
+  "NORTHMAN-INVOKE_TEST_CARD.title": "Invoke Test",
+  "NORTHMAN-INVOKE_TEST_RAGE_CARD.description": "[gold]Invoke[/gold] {Invoke:diff()}",
+  "NORTHMAN-INVOKE_TEST_RAGE_CARD.title": "Invoke Test"
 }

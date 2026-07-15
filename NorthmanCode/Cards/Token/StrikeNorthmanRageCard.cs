@@ -2,8 +2,9 @@
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using Northman.NorthmanCode.Character;
 
-namespace Northman.NorthmanCode.Cards;
+namespace Northman.NorthmanCode.Cards.Token;
 
 public class StrikeNorthmanRageCard : NorthmanRageCard
 {

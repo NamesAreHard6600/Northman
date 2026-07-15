@@ -1,14 +1,11 @@
-﻿using BaseLib.Abstracts;
-using BaseLib.Extensions;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Northman.NorthmanCode.Character;
-using Northman.NorthmanCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.CardPools;
 
-namespace Northman.NorthmanCode.Cards;
+namespace Northman.NorthmanCode.Cards.Token;
 
 /// <summary>
 /// This is the base class for your mod's cards, which is set up to load the card's images from your mod's resources.
@@ -20,5 +17,12 @@ namespace Northman.NorthmanCode.Cards;
 public abstract class NorthmanRageCard(int cost, CardType type, CardRarity rarity, TargetType target) :
     NorthmanCard(cost, type, rarity, target)
 {
-    
+    protected Task Invoke(PlayerChoiceContext ctx, CardPlay cardPlay)
+    {
+        Player player = cardPlay.Card.Owner;
+        if (!NorthmanCmd.GetRaging(player)) return Task.CompletedTask;
+
+        NorthmanModel.invoke.Set(player, NorthmanCmd.GetInvoke(player) + DynamicVars["Invoke"].IntValue);
+        return Task.CompletedTask;
+    }
 }

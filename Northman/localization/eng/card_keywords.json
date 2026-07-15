@@ -1,4 +1,7 @@
 {
-  "NORTHMAN-RAGE.description": "The red effect will not trigger automatically, but instead get added to the [rage]Rage Queue[/rage].",
-  "NORTHMAN-RAGE.title": "Rage"
+  "NORTHMAN-RAGE.description": "The red effect will not trigger when the card is played, but instead get added to the [rage]Rage Queue[/rage].",
+  "NORTHMAN-RAGE.title": "Rage",
+
+  "NORTHMAN-INVOKE.description": "The next card in the [rage]Rage Queue[/rage] triggers X additional times.",
+  "NORTHMAN-INVOKE.title": "Invoke X"
 }

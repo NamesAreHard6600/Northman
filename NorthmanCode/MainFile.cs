@@ -1,8 +1,10 @@
+using System.Reflection;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
 using Northman.NorthmanCode.Localization;
 using Northman.NorthmanCode.Utils;
+using Northman.NorthmanCode.Character;
 
 namespace Northman.NorthmanCode;
 
@@ -18,11 +20,13 @@ public partial class MainFile : Node
     public static void Initialize()
     {
         //If you want to use scripts defined in your mod for Godot scenes, uncomment the following line.
-        //Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
-        RichTextEffectRegistry.Register<RichTextRage>();
+        Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
+        // RichTextEffectRegistry.Register<RichTextRage>();
         
         Harmony harmony = new(ModId);
-
         harmony.PatchAll();
+        
+        Logger.Info("Should be registering for stuff I Guess");
+        CombatUiHooks.Register(NorthmanModel.SetupNorthmanUi);
     }
 }

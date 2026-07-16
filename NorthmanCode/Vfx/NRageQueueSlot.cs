@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Nodes.Cards;
 namespace Northman.NorthmanCode.Vfx;
 
 [GlobalClass]
-public partial class NStasisSlot : Control
+public partial class NRageQueueSlot : Control
 {
     private float _baseY;
     private MegaLabel? _count;
@@ -25,10 +25,7 @@ public partial class NStasisSlot : Control
         anim.Play("idle");
         anim.Seek((float)GD.RandRange(0, anim.CurrentAnimationLength), true);
         _visualParent = GetNode<Control>("%Visuals");
-        _count = GetNode<MegaLabel>("%Count");
-        //_cardHolder = GetNode<NCustomCardHolder>("%CardHolder");
-        _count.Text = ""; // Clear default text
-        _count.Visible = false;
+        
         _baseY = _visualParent.Position.Y;
     }
 

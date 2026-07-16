@@ -13,11 +13,21 @@ namespace Northman.NorthmanCode.Character;
 
 public class NorthmanCmd
 {
-    public static int GetMax(Player? player = null)
+    public static int GetMax(Player player)
     {
-        return 5;
+        return NorthmanModel.RageQueueSlots.Get(player);
     }
 
+    public static List<CardModel>? GetRageQueue(Player player)
+    {
+        if (GetRaging(player))
+        {
+            return GetSnapshot(player);
+        }
+        var pile = CustomPiles.GetCustomPile(player.PlayerCombatState, RageQueuePile.RageQueue);
+        return pile?.Cards.ToList();
+    }
+    
     public static int GetRageQueueSize(Player player)
     {
         if (GetRaging(player))
@@ -71,7 +81,7 @@ public class NorthmanCmd
         var pile = CustomPiles.GetCustomPile(creature.PlayerCombatState, RageQueuePile.RageQueue);
         if (pile == null) return;
 
-        if (pile.Cards.Count >= GetMax())
+        if (pile.Cards.Count >= GetMax(creature))
         {
             MainFile.Logger.Info("Rage Queue Full. Skipping for now. Later should push out old cards.");
             return;

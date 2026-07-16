@@ -1,146 +1,189 @@
-// Source: https://github.com/lamali292/Downfall/blob/main/AutomatonCode/Vfx/NSequenceDisplay.cs
-// Then adapted
-
-
-using BaseLib.Patches.Content;
 using Godot;
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using Northman.NorthmanCode.Cards.Token;
 using Northman.NorthmanCode.Character;
-using Northman.NorthmanCode.Piles;
+using Northman.NorthmanCode.Patches;
 
 namespace Northman.NorthmanCode.Vfx;
 
 [GlobalClass]
-public partial class NRageQueueDisplay : NSlotRevealDisplay
+public partial class NRageQueueDisplay : Control
 {
-    private const float RageQueueCardScale = 0.28f;
-    // private const string DisplayScenePath = "res://Automaton/scenes/ui/automaton_display.tscn";
+    private const float CardScale = 1;
 
-    private CombatManager? _combatManager;
+    private const string DisplayScenePath = "res://Northman/scenes/northman_display.tscn";
+    private const string RageQueueSlotScenePath = "res://Northman/scenes/rage_queue_slot.tscn";
+    private readonly List<NCustomCardHolder> _cardHolders = [];
+
+    private readonly List<NRageQueueSlot> _slots = [];
+    private float _bobTime;
+    private int _currentMax = 5;
+    private bool _initialized;
+
+    private HBoxContainer? _slotContainer;
+    private PackedScene? _stasisSlotScene;
+
     private Player? _trackedPlayer;
-    
-    protected override bool IsActive =>
-        _trackedPlayer != null && _combatManager is { IsInProgress: true };
+
+    internal static NRageQueueDisplay Create(Player player)
+    {
+        var scene = ResourceLoader.Load<PackedScene>(DisplayScenePath);
+        var node = scene.Instantiate<NRageQueueDisplay>(); // Line 34
+        node._trackedPlayer = player;
+        node.Scale = Vector2.One * CardScale;
+        return node;
+    }
 
     public override void _Ready()
     {
-        base._Ready();
-        _combatManager = CombatManager.Instance;
-    }
-
-    protected override IReadOnlyList<CardModel> GetRageQueueCards()
-    {
-        var pile = CustomPiles.GetCustomPile(_trackedPlayer?.PlayerCombatState, RageQueuePile.RageQueue)?.Cards;
-        return pile ?? [];
-    }
-
-    protected override int GetMaxSlots()
-    {
-        return _trackedPlayer == null ? 5 : NorthmanCmd.GetMax(_trackedPlayer);
-    }
-
-    protected override void OnSlotCardSet(int index, CardModel model, NCard node, NCustomCardHolder holder)
-    {
-        FindOnTablePatch.Register(model, node);
-    }
-
-    protected override void OnSlotCardCleared(CardModel model)
-    {
-        FindOnTablePatch.Unregister(model);
-    }
-
-    protected override List<CardModel> BuildInspectList()
-    {
-        var list = (CustomPiles.GetCustomPile(_trackedPlayer?.PlayerCombatState, EncodePile.FunctionSequence)?.Cards ?? [])
-            .Concat(CardHolders.Where(h => h.CardModel != null).Select(h => h.CardModel!)).ToList();
-        if (PreviewModel != null) list.Add(PreviewModel);
-        return list;
-    }
-    
-    // --- Static lifecycle ---
-
-    private static readonly Dictionary<Player, NSequenceDisplay> Displays = new();
-
-    static NSequenceDisplay()
-    {
-        CombatManager.Instance.CombatEnded += _ =>
-        {
-            foreach (var d in Displays.Values.Where(IsInstanceValid))
-            {
-                // Release BEFORE QueueFree: base implementation unregisters via
-                // OnSlotCardCleared and destroys only nodes still under the display.
-                d.ReleaseAllSlotCards();
-                d.QueueFree();
-            }
-            Displays.Clear();
-        };
-    }
-
-    public static NSequenceDisplay? GetDisplay(Player player)
-    {
-        var display = Displays.GetValueOrDefault(player);
-        if (display != null && IsInstanceValid(display)) return display;
-        Displays.Remove(player);
-        return null;
-    }
-
-    public static bool HasDisplay(Player player)
-    {
-        var display = Displays.GetValueOrDefault(player);
-        return display != null && IsInstanceValid(display);
+        _slotContainer = GetNode<HBoxContainer>("%SlotContainer");
+        _stasisSlotScene = ResourceLoader.Load<PackedScene>(RageQueueSlotScenePath);
     }
 
     public override void _ExitTree()
     {
-        base._ExitTree(); // releases slot + preview cards (unregisters via OnSlotCardCleared)
-        if (_trackedPlayer != null && Displays.GetValueOrDefault(_trackedPlayer) == this)
-            Displays.Remove(_trackedPlayer);
+        // Combat end / room teardown: unregister everything we put into the
+        // FindOnTable registry so it can never serve this display's dead nodes
+        // in a later combat (CardModels persist across fights).
+        ReleaseAllCards();
     }
 
-    public static void SetupFor(NCombatRoom combatRoom, Player player)
+    /// <summary>
+    ///     Display card nodes can be ADOPTED by the base game: when a stasis card
+    ///     moves to another pile, NCard.FindOnTable (via FindOnTablePatch) hands the
+    ///     engine our node and the engine reparents it into the hand/play flow.
+    ///     From that moment the node is no longer ours.
+    ///
+    ///     So on cleanup we only destroy a node that is still under this display
+    ///     (IsAncestorOf). If it was reparented away, we just drop our references
+    ///     and let the game manage its lifecycle (it will pool-free it itself).
+    /// </summary>
+    internal void ReleaseHolder(NCustomCardHolder holder)
     {
-        if (HasDisplay(player)) return;
-        var scene = ResourceLoader.Load<PackedScene>(DisplayScenePath);
-        var display = scene.Instantiate<NSequenceDisplay>();
-        display._trackedPlayer = player;
-        display.Scale = Vector2.One * (LocalContext.IsMe(player) ? SequencedCardScale : SequencedCardScale * 0.5f);
-        display.Direction = RevealDirection.Right;
-        display.ZIndex = LocalContext.IsMe(player) ? 1 : 0;
-        var vfxContainer = combatRoom.CombatVfxContainer;
-        vfxContainer.AddChildSafely(display);
+        if (holder.CardModel != null)
+            FindOnTablePatch.Unregister(holder.CardModel);
 
-        var creatureNode = combatRoom.GetCreatureNode(player.Creature);
-        if (creatureNode != null)
-        {
-            var globalTopPos = creatureNode.GetTopOfHitbox();
-            var localPos = vfxContainer.GetGlobalTransform().AffineInverse() * globalTopPos;
-            var x = LocalContext.IsMe(player) ? -90 : -50;
-            var y = LocalContext.IsMe(player) ? -100 : -40;
-            display.Position = localPos + new Vector2(x, y);
-        }
+        var cardNode = holder.CardNode;
+        if (cardNode == null || !IsInstanceValid(cardNode)) return;
 
-        Displays[player] = display;
-        display.Refresh(true);
+        var stillOwned = cardNode.IsInsideTree() && IsAncestorOf(cardNode);
+        if (!stillOwned) return; // adopted by the hand/play flow — hands off
+
+        cardNode.GetParent()?.RemoveChild(cardNode);
+        cardNode.QueueFree();
     }
 
-    /// <summary>Static refresh used by game logic (AutomatonCmd etc.).</summary>
-    public static void Refresh(Player player, bool force = false)
+    internal void ReleaseAllCards()
     {
-        if (!HasDisplay(player))
+        foreach (var h in _cardHolders) ReleaseHolder(h);
+        _cardHolders.Clear();
+    }
+
+    internal void EnsureSlotCount(int count)
+    {
+        if (_slotContainer == null || _stasisSlotScene == null) return;
+        while (_slots.Count > count)
         {
-            var combatRoom = NCombatRoom.Instance;
-            if (combatRoom == null) return;
-            SetupFor(combatRoom, player);
-            return;
+            var lastSlot = _slots[^1];
+            _slots.RemoveAt(_slots.Count - 1);
+            lastSlot.QueueFree(); // safe: runs after ReleaseAllCards, slots are empty
         }
-        Displays[player].Refresh(force);
+
+        while (_slots.Count < count)
+        {
+            var slot = _stasisSlotScene.Instantiate<NRageQueueSlot>();
+            _slotContainer.AddChild(slot);
+            _slots.Add(slot);
+        }
+    }
+
+    internal Vector2 GetSlotGlobalPosition(int index)
+    {
+        var clamped = Math.Clamp(index, 0, _currentMax - 1);
+        return clamped < _slots.Count ? _slots[clamped].CardAnchorGlobal : GlobalPosition;
+    }
+
+    internal void Refresh()
+    {
+        if (_trackedPlayer == null) return;
+
+        var sequence = NorthmanCmd.GetRageQueue(_trackedPlayer);
+        _currentMax = NorthmanCmd.GetMax(_trackedPlayer);
+        _initialized = true;
+
+        // Order matters:
+        // 1) unregister + destroy only the nodes we still own
+        ReleaseAllCards();
+        // 2) clear the (now empty) holders
+        foreach (var slot in _slots) slot.ClearCard();
+        // 3) only now shrink/grow — shrinking earlier could QueueFree a slot
+        //    that still contained a live card
+        EnsureSlotCount(_currentMax);
+
+        for (var i = 0; i < _slots.Count; i++)
+        {
+            var slot = _slots[i];
+            slot.Visible = i < _currentMax;
+
+            if (i >= _currentMax || i >= sequence.Count) continue;
+
+            var cardNode = NCard.Create(sequence[i]);
+            if (cardNode == null) continue;
+
+            var holder = slot.SetCard(cardNode);
+            if (holder == null)
+            {
+                // fresh node, nothing else references it yet — safe to discard
+                cardNode.QueueFree();
+                continue;
+            }
+
+            holder.SetClickable(true);
+            var captured = i;
+            holder.Pressed += _ => NGame.Instance?.GetInspectCardScreen()
+                .Open(AllCardsForInspect(), captured);
+
+            cardNode.UpdateVisuals(PileType.Hand, CardPreviewMode.Normal);
+            FindOnTablePatch.Register(sequence[i], cardNode);
+            _cardHolders.Add(holder);
+        }
+
+    }
+
+    internal List<CardModel> AllCardsForInspect()
+    {
+        return _cardHolders.Where(h => h.CardModel != null).Select(h => h.CardModel!).ToList();
+    }
+
+    internal NCard? GetNCard(CardModel card)
+    {
+        var cardNode = _cardHolders.Find(h => h.CardModel == card)?.CardNode;
+
+        // Also verify the model still matches: a pooled node can be alive but
+        // recycled to display a different card.
+        if (cardNode != null && IsInstanceValid(cardNode) && cardNode.Model == card)
+            return cardNode;
+
+        return null;
+    }
+
+    internal Vector2? GetTargetPosition(CardModel card)
+    {
+        if (_trackedPlayer == null) return GlobalPosition;
+
+        var sequence = NorthmanCmd.GetRageQueue(_trackedPlayer);
+        
+        // I should fix all the null reference stuff, it's never null but it think that it is
+        var existingIndex = sequence.IndexOf(card);
+        if (existingIndex >= 0)
+            return existingIndex < _slots.Count ? _slots[existingIndex].CardAnchorGlobal : GlobalPosition;
+        var nextIndex = sequence.Count;
+        if (nextIndex >= _currentMax)
+            nextIndex = _currentMax - 1;
+
+        return nextIndex < _slots.Count ? _slots[nextIndex].CardAnchorGlobal : GlobalPosition;
     }
 }

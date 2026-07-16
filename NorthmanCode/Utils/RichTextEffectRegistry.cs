@@ -1,4 +1,5 @@
 ﻿// Source: https://github.com/lamali292/Downfall/blob/main/DownfallCode/Utils/RichTextEffectRegistry.cs and Adapted (with AI shhhh)
+// It still don't work tho so...
 
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.RichTextTags;

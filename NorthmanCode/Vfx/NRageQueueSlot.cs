@@ -16,8 +16,8 @@ public partial class NRageQueueSlot : Control
     // Changed to internal
     internal Vector2 CardAnchorGlobal => GetGlobalTransform().Origin + Size * GetGlobalTransform().Scale / 2f;
 
-    private static float CardScale => 0.15f;
-    private static float BigCardScale => 0.75f;
+    private static float CardScale => 0.35f;
+    private static float BigCardScale => 0.45f;
 
     public override void _Ready()
     {

@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://dt4bacd7eoh7"]
 
 [ext_resource type="Script" uid="uid://bnbshwxo40cw5" path="res://NorthmanCode/Vfx/NCustomCardHolder.cs" id="1_maxn8"]
-[ext_resource type="Script" path="res://src/Core/Nodes/Cards/Holders/NCardHolderHitbox.cs" id="2_yvj56"]
+[ext_resource type="Script" path="res://NorthmanCode/Vfx/NorthmanNCardHolderHitbox.cs" id="2_yvj56"]
 
 [node name="GridCardHolder" type="Control"]
 layout_mode = 3

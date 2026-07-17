@@ -100,7 +100,7 @@ public partial class NRageQueueDisplay : Control
     {
         if (_trackedPlayer == null) return;
 
-        var sequence = NorthmanCmd.GetRageQueue(_trackedPlayer);
+        var sequence = NorthmanCmd.GetRageQueue(_trackedPlayer) ?? [];
         _currentMax = NorthmanCmd.GetMax(_trackedPlayer);
         _initialized = true;
 
@@ -162,7 +162,7 @@ public partial class NRageQueueDisplay : Control
     {
         if (_trackedPlayer == null) return GlobalPosition;
 
-        var sequence = NorthmanCmd.GetRageQueue(_trackedPlayer);
+        var sequence = NorthmanCmd.GetRageQueue(_trackedPlayer) ?? [];
         
         var existingIndex = sequence.IndexOf(card);
         if (existingIndex >= 0)

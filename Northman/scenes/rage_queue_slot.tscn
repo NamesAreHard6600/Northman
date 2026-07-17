@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://8hww7gfqjj0x"]
+[gd_scene load_steps=6 format=3 uid="uid://8hww7gfqjj0x"]
 
-[ext_resource type="Texture2D" uid="uid://bwh7bh467av5h" path="res://images/orbs/empty_orb.png" id="1_vv4fg"]
-[ext_resource type="Script" path="res://NorthmanCode/Vfx/NNorthmanSlot.cs" id="2_vv4fg"]
+[ext_resource type="Texture2D" uid="uid://w2fvhydnoumu" path="res://Northman/images/orbs/empty_orb.png" id="1_vv4fg"]
+[ext_resource type="Script" uid="uid://kf6whtjrpbax" path="res://NorthmanCode/Vfx/NRageQueueSlot.cs" id="2_vv4fg"]
 
 [sub_resource type="Animation" id="Animation_uouql"]
 length = 0.001
-tracks/0/type = "value" 
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Visuals/TextureRect:rotation")

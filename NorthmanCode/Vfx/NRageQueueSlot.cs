@@ -1,4 +1,3 @@
-
 using Godot;
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Models;
@@ -14,7 +13,9 @@ public partial class NRageQueueSlot : Control
     private NCustomCardHolder? _holder;
 
     private Control? _visualParent;
-    public Vector2 CardAnchorGlobal => GetGlobalTransform().Origin + Size * GetGlobalTransform().Scale / 2f;
+    
+    // Changed to internal
+    internal Vector2 CardAnchorGlobal => GetGlobalTransform().Origin + Size * GetGlobalTransform().Scale / 2f;
 
     private static float CardScale => 0.15f;
     private static float BigCardScale => 0.75f;
@@ -29,7 +30,8 @@ public partial class NRageQueueSlot : Control
         _baseY = _visualParent.Position.Y;
     }
 
-    public NCustomCardHolder? SetCard(NCard cardNode)
+    // Changed to internal
+    internal NCustomCardHolder? SetCard(NCard cardNode)
     {
         ClearCard();
 
@@ -47,7 +49,8 @@ public partial class NRageQueueSlot : Control
         return _holder;
     }
 
-    public void ClearCard()
+    // Changed to internal
+    internal void ClearCard()
     {
         _holder?.QueueFree();
         _holder = null;

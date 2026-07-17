@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cjay4gdnqo1bu"]
+[gd_scene load_steps=2 format=3 uid="uid://cjay4gdnqo1bu"]
 
-[ext_resource type="Script" path="res://NorthmanCode/Vfx/NRageQueueDisplay.cs" id="1_sok8l"]
+[ext_resource type="Script" uid="uid://do4stg4r4w63f" path="res://NorthmanCode/Vfx/NRageQueueDisplay.cs" id="1_sok8l"]
 
 [node name="NorthmanDisplay" type="Control"]
 layout_mode = 3

@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿/*
+using Godot;
 using MegaCrit.Sts2.Core.RichTextTags;
 
 namespace Northman.NorthmanCode.Localization;
@@ -12,4 +13,4 @@ public partial class RichTextRage : AbstractMegaRichTextEffect
         charFx.Color = new Color("#bd0606");
         return true;
     }
-}
+}*/

@@ -2,7 +2,7 @@ using System.Reflection;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
-using Northman.NorthmanCode.Localization;
+//using Northman.NorthmanCode.Localization;
 using Northman.NorthmanCode.Utils;
 using Northman.NorthmanCode.Character;
 

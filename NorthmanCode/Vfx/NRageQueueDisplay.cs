@@ -28,10 +28,11 @@ public partial class NRageQueueDisplay : Control
 
     private Player? _trackedPlayer;
 
+    // Changed to internal static
     internal static NRageQueueDisplay Create(Player player)
     {
         var scene = ResourceLoader.Load<PackedScene>(DisplayScenePath);
-        var node = scene.Instantiate<NRageQueueDisplay>(); // Line 34
+        var node = scene.Instantiate<NRageQueueDisplay>();
         node._trackedPlayer = player;
         node.Scale = Vector2.One * CardScale;
         return node;
@@ -45,23 +46,10 @@ public partial class NRageQueueDisplay : Control
 
     public override void _ExitTree()
     {
-        // Combat end / room teardown: unregister everything we put into the
-        // FindOnTable registry so it can never serve this display's dead nodes
-        // in a later combat (CardModels persist across fights).
         ReleaseAllCards();
     }
 
-    /// <summary>
-    ///     Display card nodes can be ADOPTED by the base game: when a stasis card
-    ///     moves to another pile, NCard.FindOnTable (via FindOnTablePatch) hands the
-    ///     engine our node and the engine reparents it into the hand/play flow.
-    ///     From that moment the node is no longer ours.
-    ///
-    ///     So on cleanup we only destroy a node that is still under this display
-    ///     (IsAncestorOf). If it was reparented away, we just drop our references
-    ///     and let the game manage its lifecycle (it will pool-free it itself).
-    /// </summary>
-    internal void ReleaseHolder(NCustomCardHolder holder)
+    private void ReleaseHolder(NCustomCardHolder holder)
     {
         if (holder.CardModel != null)
             FindOnTablePatch.Unregister(holder.CardModel);
@@ -70,26 +58,26 @@ public partial class NRageQueueDisplay : Control
         if (cardNode == null || !IsInstanceValid(cardNode)) return;
 
         var stillOwned = cardNode.IsInsideTree() && IsAncestorOf(cardNode);
-        if (!stillOwned) return; // adopted by the hand/play flow — hands off
+        if (!stillOwned) return;
 
         cardNode.GetParent()?.RemoveChild(cardNode);
         cardNode.QueueFree();
     }
 
-    internal void ReleaseAllCards()
+    private void ReleaseAllCards()
     {
         foreach (var h in _cardHolders) ReleaseHolder(h);
         _cardHolders.Clear();
     }
 
-    internal void EnsureSlotCount(int count)
+    private void EnsureSlotCount(int count)
     {
         if (_slotContainer == null || _stasisSlotScene == null) return;
         while (_slots.Count > count)
         {
             var lastSlot = _slots[^1];
             _slots.RemoveAt(_slots.Count - 1);
-            lastSlot.QueueFree(); // safe: runs after ReleaseAllCards, slots are empty
+            lastSlot.QueueFree();
         }
 
         while (_slots.Count < count)
@@ -100,12 +88,14 @@ public partial class NRageQueueDisplay : Control
         }
     }
 
+    // Changed to internal
     internal Vector2 GetSlotGlobalPosition(int index)
     {
         var clamped = Math.Clamp(index, 0, _currentMax - 1);
         return clamped < _slots.Count ? _slots[clamped].CardAnchorGlobal : GlobalPosition;
     }
 
+    // Changed to internal
     internal void Refresh()
     {
         if (_trackedPlayer == null) return;
@@ -114,13 +104,8 @@ public partial class NRageQueueDisplay : Control
         _currentMax = NorthmanCmd.GetMax(_trackedPlayer);
         _initialized = true;
 
-        // Order matters:
-        // 1) unregister + destroy only the nodes we still own
         ReleaseAllCards();
-        // 2) clear the (now empty) holders
         foreach (var slot in _slots) slot.ClearCard();
-        // 3) only now shrink/grow — shrinking earlier could QueueFree a slot
-        //    that still contained a live card
         EnsureSlotCount(_currentMax);
 
         for (var i = 0; i < _slots.Count; i++)
@@ -136,7 +121,6 @@ public partial class NRageQueueDisplay : Control
             var holder = slot.SetCard(cardNode);
             if (holder == null)
             {
-                // fresh node, nothing else references it yet — safe to discard
                 cardNode.QueueFree();
                 continue;
             }
@@ -150,33 +134,36 @@ public partial class NRageQueueDisplay : Control
             FindOnTablePatch.Register(sequence[i], cardNode);
             _cardHolders.Add(holder);
         }
-
     }
 
-    internal List<CardModel> AllCardsForInspect()
+    private List<CardModel> AllCardsForInspect()
     {
         return _cardHolders.Where(h => h.CardModel != null).Select(h => h.CardModel!).ToList();
     }
 
+    // Changed to internal
     internal NCard? GetNCard(CardModel card)
     {
-        var cardNode = _cardHolders.Find(h => h.CardModel == card)?.CardNode;
+        var holder = _cardHolders.Find(h => h.CardModel == card);
+        if (holder == null) return null;
 
-        // Also verify the model still matches: a pooled node can be alive but
-        // recycled to display a different card.
-        if (cardNode != null && IsInstanceValid(cardNode) && cardNode.Model == card)
+        var cardNode = holder.CardNode;
+
+        if (IsInstanceValid(cardNode) && cardNode.IsInsideTree() && cardNode.Model == card)
+        {
             return cardNode;
+        }
 
         return null;
     }
 
+    // Changed to internal
     internal Vector2? GetTargetPosition(CardModel card)
     {
         if (_trackedPlayer == null) return GlobalPosition;
 
         var sequence = NorthmanCmd.GetRageQueue(_trackedPlayer);
         
-        // I should fix all the null reference stuff, it's never null but it think that it is
         var existingIndex = sequence.IndexOf(card);
         if (existingIndex >= 0)
             return existingIndex < _slots.Count ? _slots[existingIndex].CardAnchorGlobal : GlobalPosition;

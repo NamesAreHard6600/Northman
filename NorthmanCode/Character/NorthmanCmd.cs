@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using Northman.NorthmanCode.Cards;
-using Northman.NorthmanCode.Cards.Token;
 using Northman.NorthmanCode.Displays;
 using Northman.NorthmanCode.Piles;
 

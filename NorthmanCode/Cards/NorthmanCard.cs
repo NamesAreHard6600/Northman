@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using Northman.NorthmanCode.Cards.Token;
 using Northman.NorthmanCode.CustomEnums;
 
 namespace Northman.NorthmanCode.Cards;

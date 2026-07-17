@@ -24,7 +24,7 @@ public partial class NCustomCardHolder : NCardHolder, IPoolable
     protected override Vector2 HoverScale => Vector2.One * _hoverScale;
     public override CardModel? CardModel => _baseCard;
 
-    private static string ScenePath => "res://Downfall/scenes/screens/custom_card_holder.tscn";
+    private static string ScenePath => "res://Northman/scenes/screens/custom_card_holder.tscn";
 
     public void OnInstantiated()
     {

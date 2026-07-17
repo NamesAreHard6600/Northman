@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using Northman.NorthmanCode.Cards;
 using Northman.NorthmanCode.Cards.Token;
+using Northman.NorthmanCode.Displays;
 using Northman.NorthmanCode.Piles;
 
 namespace Northman.NorthmanCode.Character;
@@ -90,7 +91,8 @@ public class NorthmanCmd
         await CardPileCmd.Add(card, pile);
         
         MainFile.Logger.Info("Card Added");
-        return;
+        NorthmanDisplay.Refresh(creature);
+        MainFile.Logger.Info("Display Updated");
     }
 
     public static async Task TriggerRageQueue(PlayerChoiceContext ctx, Player player)
@@ -125,6 +127,7 @@ public class NorthmanCmd
         
         // Post Rage
         NorthmanModel.raging.Set(player, false);
+        NorthmanDisplay.Refresh(player);
         return;
     }
 

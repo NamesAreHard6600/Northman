@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Modding;
 //using Northman.NorthmanCode.Localization;
 using Northman.NorthmanCode.Utils;
 using Northman.NorthmanCode.Character;
+using Northman.NorthmanCode.Vfx;
 
 namespace Northman.NorthmanCode;
 
@@ -27,6 +28,7 @@ public partial class MainFile : Node
         harmony.PatchAll();
         
         Logger.Info("Should be registering for stuff I Guess");
+        NCustomCardHolder.InitPool();
         CombatUiHooks.Register(NorthmanModel.SetupNorthmanUi);
     }
 }

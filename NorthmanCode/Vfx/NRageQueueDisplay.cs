@@ -16,7 +16,7 @@ public partial class NRageQueueDisplay : Control
 
     private const string DisplayScenePath = "res://Northman/scenes/northman_display.tscn";
     private const string RageQueueSlotScenePath = "res://Northman/scenes/rage_queue_slot.tscn";
-    private readonly List<NCustomCardHolder> _cardHolders = [];
+    private readonly List<NNorthmanCustomCardHolder> _cardHolders = [];
 
     private readonly List<NRageQueueSlot> _slots = [];
     private float _bobTime;
@@ -49,7 +49,7 @@ public partial class NRageQueueDisplay : Control
         ReleaseAllCards();
     }
 
-    private void ReleaseHolder(NCustomCardHolder holder)
+    private void ReleaseHolder(NNorthmanCustomCardHolder holder)
     {
         if (holder.CardModel != null)
             FindOnTablePatch.Unregister(holder.CardModel);

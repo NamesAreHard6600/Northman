@@ -28,7 +28,7 @@ public partial class MainFile : Node
         harmony.PatchAll();
         
         Logger.Info("Should be registering for stuff I Guess");
-        NCustomCardHolder.InitPool();
+        NNorthmanCustomCardHolder.InitPool();
         CombatUiHooks.Register(NorthmanModel.SetupNorthmanUi);
     }
 }

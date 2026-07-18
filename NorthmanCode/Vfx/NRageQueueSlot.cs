@@ -9,7 +9,7 @@ public partial class NRageQueueSlot : Control
 {
     private float _baseY;
     private MegaLabel? _count;
-    private NCustomCardHolder? _holder;
+    private NNorthmanCustomCardHolder? _holder;
 
     private Control? _visualParent;
     
@@ -30,11 +30,11 @@ public partial class NRageQueueSlot : Control
     }
 
     // Changed to internal
-    internal NCustomCardHolder? SetCard(NCard cardNode)
+    internal NNorthmanCustomCardHolder? SetCard(NCard cardNode)
     {
         ClearCard();
 
-        _holder = NCustomCardHolder.Create(cardNode, CardScale, BigCardScale);
+        _holder = NNorthmanCustomCardHolder.Create(cardNode, CardScale, BigCardScale);
         if (_holder == null) return null;
 
         _visualParent!.AddChild(_holder);

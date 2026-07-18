@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.TestSupport;
 namespace Northman.NorthmanCode.Vfx;
 
 [GlobalClass]
-public partial class NCustomCardHolder : NCardHolder, IPoolable
+public partial class NNorthmanCustomCardHolder : NCardHolder, IPoolable
 {
     private CardModel? _baseCard;
     private float _hoverScale;
@@ -49,14 +49,14 @@ public partial class NCustomCardHolder : NCardHolder, IPoolable
 
     public static void InitPool()
     {
-        NodePool.Init<NCustomCardHolder>(ScenePath, 30);
+        NodePool.Init<NNorthmanCustomCardHolder>(ScenePath, 30);
     }
 
-    public static NCustomCardHolder? Create(NCard cardNode, float customSmallScale = 1.0f,
+    public static NNorthmanCustomCardHolder? Create(NCard cardNode, float customSmallScale = 1.0f,
         float customHoverScale = 1.0f)
     {
         if (TestMode.IsOn) return null;
-        var holder = NodePool.Get<NCustomCardHolder>();
+        var holder = NodePool.Get<NNorthmanCustomCardHolder>();
         holder._smallScale = customSmallScale;
         holder._hoverScale = customHoverScale;
         holder.SetCard(cardNode);

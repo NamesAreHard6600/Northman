@@ -14,6 +14,7 @@ public class StrikeNorthman : NorthmanCard
         WithDamage(3, 2);
         WithTags(CardTag.Strike);
         WithRageCard();
+        WithAnger(1);
         
         this.WithCardTip<StrikeNorthmanRageCard>();
     }
@@ -22,6 +23,8 @@ public class StrikeNorthman : NorthmanCard
         PlayerChoiceContext ctx,
         CardPlay cardPlay)
     {
+        await AdjustAnger(ctx, cardPlay);
+        
         await CommonActions.CardAttack(this, cardPlay).Execute(ctx);
         
         await AddRageCard<StrikeNorthmanRageCard>(ctx, cardPlay);

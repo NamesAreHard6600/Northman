@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Commands;
 using Northman.NorthmanCode.Character;
 using Northman.NorthmanCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -49,6 +50,13 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
         return this;
     }
 
+    protected NorthmanCard WithAnger(int anger, int upgrade = 0)
+    {
+        this.WithKeyword(NorthmanKeyword.Anger);
+        WithVar("Anger", anger, upgrade);
+        return this;
+    }
+
     protected async Task AddRageCard<T>(
         PlayerChoiceContext ctx,
         CardPlay cardPlay) where T : NorthmanRageCard
@@ -61,5 +69,11 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
             CardCmd.Upgrade(card);
         
         await NorthmanCmd.AddCard(ctx, card);
+    }
+
+    protected async Task AdjustAnger(PlayerChoiceContext ctx, CardPlay cardPlay)
+    {
+        var player = cardPlay.Player;
+        await NorthmanCmd.AdjustAnger(player, DynamicVars["Anger"].IntValue);
     }
 }

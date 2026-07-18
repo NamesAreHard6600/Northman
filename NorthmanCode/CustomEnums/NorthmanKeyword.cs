@@ -10,4 +10,7 @@ public class NorthmanKeyword
     
     [CustomEnum] [KeywordProperties(AutoKeywordPosition.None)]
     public static CardKeyword Invoke;
+    
+    [CustomEnum] [KeywordProperties(AutoKeywordPosition.None)]
+    public static CardKeyword Anger;
 }

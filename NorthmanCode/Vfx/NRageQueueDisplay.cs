@@ -101,7 +101,7 @@ public partial class NRageQueueDisplay : Control
         if (_trackedPlayer == null) return;
 
         var sequence = NorthmanCmd.GetRageQueue(_trackedPlayer) ?? [];
-        _currentMax = NorthmanCmd.GetMax(_trackedPlayer);
+        _currentMax = NorthmanCmd.GetSlotSizeMax(_trackedPlayer);
         _initialized = true;
 
         ReleaseAllCards();

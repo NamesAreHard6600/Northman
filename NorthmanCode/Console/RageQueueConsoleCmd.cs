@@ -49,11 +49,18 @@ public class RageQueueLogCmd : AbstractConsoleCmd
         var ctx = new BlockingPlayerChoiceContext();
         
         var pile = CustomPiles.GetCustomPile(issuingPlayer.PlayerCombatState, RageQueuePile.RageQueue);
-        if (pile == null || pile.Cards.Count == 0)
-            return new CmdResult(true, "No Card in Rage Queue.");
+        var size = NorthmanCmd.GetSlotSize(issuingPlayer);
         
-        MainFile.Logger.Info("Size of Rage Queue: " + pile.Cards.Count);
-        MainFile.Logger.Info("More Logging to Come");
+        MainFile.Logger.Info("Anger: " + NorthmanCmd.GetAnger(issuingPlayer) + "/" + NorthmanCmd.GetAngerMax(issuingPlayer));
+        MainFile.Logger.Info("Size of Rage Queue: " + size);
+        if (pile == null || size == 0)
+            return new CmdResult(true, "No Cards in Rage Queue.");
+
+        var cardNumber = 1;
+        foreach (var card in pile.Cards)
+        {
+            MainFile.Logger.Info("Card " + cardNumber + ": " + card.Title);
+        }
 
         return new CmdResult(true, "Queue logged to debug.");
     }

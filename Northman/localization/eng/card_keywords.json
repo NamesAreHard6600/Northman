@@ -3,5 +3,8 @@
   "NORTHMAN-RAGE.title": "Rage",
 
   "NORTHMAN-INVOKE.description": "The next card in the [rage]Rage Queue[/rage] triggers X additional times.",
-  "NORTHMAN-INVOKE.title": "Invoke X"
+  "NORTHMAN-INVOKE.title": "Invoke X",
+
+  "NORTHMAN-ANGER.description": "This card generates (or diminishes) [rage]Anger[/rage]. When you reach 5 [rage]Anger[/rage], the [rage]Rage Queue[/rage] triggers.",
+  "NORTHMAN-ANGER.title": "Anger"
 }

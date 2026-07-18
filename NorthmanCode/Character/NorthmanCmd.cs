@@ -13,22 +13,7 @@ namespace Northman.NorthmanCode.Character;
 
 public class NorthmanCmd
 {
-    public static int GetMax(Player player)
-    {
-        return NorthmanModel.RageQueueSlots.Get(player);
-    }
-
-    public static List<CardModel>? GetRageQueue(Player player)
-    {
-        if (GetRaging(player))
-        {
-            return GetSnapshot(player);
-        }
-        var pile = CustomPiles.GetCustomPile(player.PlayerCombatState, RageQueuePile.RageQueue);
-        return pile?.Cards.ToList();
-    }
-    
-    public static int GetRageQueueSize(Player player)
+    public static int GetSlotSize(Player player)
     {
         if (GetRaging(player))
         {
@@ -40,10 +25,30 @@ public class NorthmanCmd
         if (pile == null) return -1;
         return pile.Cards.Count;
     }
-
-    public static bool IsIndexInRange(Player player, int index)
+    
+    public static int GetSlotSizeMax(Player player)
     {
-        return index < GetRageQueueSize(player);
+        return NorthmanModel.RageQueueSlots.Get(player);
+    }
+
+    public static int GetAnger(Player player)
+    {
+        return NorthmanModel.AngerAmount.Get(player);
+    }
+    
+    public static int GetAngerMax(Player player)
+    {
+        return 5;
+    }
+
+    public static List<CardModel>? GetRageQueue(Player player)
+    {
+        if (GetRaging(player))
+        {
+            return GetSnapshot(player);
+        }
+        var pile = CustomPiles.GetCustomPile(player.PlayerCombatState, RageQueuePile.RageQueue);
+        return pile?.Cards.ToList();
     }
 
     public static bool GetRaging(Player player)
@@ -65,14 +70,32 @@ public class NorthmanCmd
     {
         return NorthmanModel.invoke.Get(player);
     }
+    
+    public static bool IsIndexInRange(Player player, int index)
+    {
+        return index < GetSlotSize(player);
+    }
 
-    public static async Task ResetRageQueue(PlayerChoiceContext ctx,
+    public static Task ResetRageQueue(PlayerChoiceContext ctx,
         Player player)
     {
         var pile = CustomPiles.GetCustomPile(player.PlayerCombatState, RageQueuePile.RageQueue);
-        if (pile == null) return;
+        if (pile == null) return Task.CompletedTask;
         pile.Clear();
-        
+        // To lazy to make a setter
+        NorthmanModel.AngerAmount.Set(player, 0);
+        NorthmanDisplay.Refresh(player);
+        return Task.CompletedTask;
+    }
+
+    public static Task AdjustAnger(Player player, int anger)
+    {
+        MainFile.Logger.Info("Gaining anger " + anger);
+        int newAnger = NorthmanModel.AngerAmount.Get(player) + anger;
+        newAnger = Math.Min(GetAngerMax(player), Math.Max(0, newAnger));
+        MainFile.Logger.Info("Setting new anger " + newAnger);
+        NorthmanModel.AngerAmount.Set(player, newAnger);
+        return Task.CompletedTask;
     }
     
     public static async Task AddCard(PlayerChoiceContext ctx, NorthmanRageCard card)
@@ -81,7 +104,7 @@ public class NorthmanCmd
         var pile = CustomPiles.GetCustomPile(creature.PlayerCombatState, RageQueuePile.RageQueue);
         if (pile == null) return;
 
-        if (pile.Cards.Count >= GetMax(creature))
+        if (pile.Cards.Count >= GetSlotSizeMax(creature))
         {
             MainFile.Logger.Info("Rage Queue Full. Skipping for now. Later should push out old cards.");
             return;
@@ -104,10 +127,10 @@ public class NorthmanCmd
         NorthmanModel.currentIndex.Set(player, 0);
         NorthmanModel.snapshot.Set(player, snapshot);
         NorthmanModel.invoke.Set(player, 0);
-        pile.Clear();
+        await ResetRageQueue(ctx, player);
         
         MainFile.Logger.Info(GetCurrentIndex(player).ToString());
-        MainFile.Logger.Info(GetRageQueueSize(player).ToString());
+        MainFile.Logger.Info(GetSlotSize(player).ToString());
         MainFile.Logger.Info(IsIndexInRange(player, GetCurrentIndex(player)).ToString());
         
         

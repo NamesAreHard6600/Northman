@@ -10,5 +10,8 @@
   "NORTHMAN-INVOKE_TEST_CARD.description": "[color=red]Rage: Invoke {Invoke:diff()}.[/color]",
   "NORTHMAN-INVOKE_TEST_CARD.title": "Invoke Test",
   "NORTHMAN-INVOKE_TEST_RAGE_CARD.description": "[font_size=30][gold]Invoke[/gold] {Invoke:diff()}[/font_size]",
-  "NORTHMAN-INVOKE_TEST_RAGE_CARD.title": "Invoke Test"
+  "NORTHMAN-INVOKE_TEST_RAGE_CARD.title": "Invoke Test",
+
+  "NORTHMAN-LET_IT_OUT.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 1)}.\n Deal {Damage:diff()} Damage.",
+  "NORTHMAN-LET_IT_OUT.title": "Let it Out"
 }

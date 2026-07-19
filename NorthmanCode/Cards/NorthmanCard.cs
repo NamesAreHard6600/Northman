@@ -84,9 +84,12 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
     protected async Task AdjustAnger(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         var player = cardPlay.Player;
-        
+        var anger = cardPlay.Card.DynamicVars["Anger"].IntValue;
         // Give anger amount
-        await SecondaryResourceCmd.Gain(player, ResourceId, cardPlay.Card.DynamicVars["Anger"].IntValue);
+        if (anger > 0)
+            await SecondaryResourceCmd.Gain(player, ResourceId, anger);
+        else if (anger < 0)
+            await SecondaryResourceCmd.Lose(player, ResourceId, -anger);
         // Lock to maximum would go here if needed
     }
 }

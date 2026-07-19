@@ -72,6 +72,8 @@ public partial class NNorthmanCustomCardHolder : NCardHolder, IPoolable
         _isPreviewingUpgrade = false;
         SetIsPreviewingUpgrade(previewingUpgrade);
         ConnectSignals();
+        // Didn't work
+        // Hitbox.MouseEntered += MoveToFront;
     }
 
     protected override void OnFocus()
@@ -84,7 +86,7 @@ public partial class NNorthmanCustomCardHolder : NCardHolder, IPoolable
     {
         Name = (StringName)$"CustomCardHolder-{CardNode?.Model?.Id}";
     }
-
+    
     private void UpdateCardModel()
     {
         var model = CardNode?.Model;

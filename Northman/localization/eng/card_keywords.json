@@ -1,10 +1,10 @@
 {
-  "NORTHMAN-RAGE.description": "The red effect will not trigger when the card is played, but instead get added to the [rage]Rage Queue[/rage].",
+  "NORTHMAN-RAGE.description": "The red effect will not trigger when the card is played, but instead get added to the [color=red]Rage Queue[/color].",
   "NORTHMAN-RAGE.title": "Rage",
 
-  "NORTHMAN-INVOKE.description": "The next card in the [rage]Rage Queue[/rage] triggers X additional times.",
+  "NORTHMAN-INVOKE.description": "The next card in the [color=red]Rage Queue[/color] triggers X additional times.",
   "NORTHMAN-INVOKE.title": "Invoke X",
 
-  "NORTHMAN-ANGER.description": "This card generates (or diminishes) [rage]Anger[/rage]. When you reach 5 [rage]Anger[/rage], the [rage]Rage Queue[/rage] triggers.",
+  "NORTHMAN-ANGER.description": "This card generates (or diminishes) [color=red]Anger[/color]. When you reach 5 [color=red]Anger[/color], the [color=red]Rage Queue[/color] triggers.",
   "NORTHMAN-ANGER.title": "Anger"
 }

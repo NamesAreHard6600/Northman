@@ -95,6 +95,11 @@ public partial class NRageQueueDisplay : Control
         return clamped < _slots.Count ? _slots[clamped].CardAnchorGlobal : GlobalPosition;
     }
 
+    internal void ClearCard(int index)
+    {
+        _slots[index].ClearCard();
+    }
+    
     // Changed to internal
     internal void Refresh()
     {

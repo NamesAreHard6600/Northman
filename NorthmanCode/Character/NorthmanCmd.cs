@@ -3,7 +3,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using Northman.NorthmanCode.Cards;
 using Northman.NorthmanCode.Displays;
@@ -108,7 +107,7 @@ public class NorthmanCmd
             return;
         }
         
-        await CardPileCmd.Add(card, pile);
+        await CardPileCmd.Add(card, pile, skipVisuals: true);
         
         MainFile.Logger.Info("Card Added");
         NorthmanDisplay.Refresh(creature);
@@ -142,6 +141,7 @@ public class NorthmanCmd
             await TriggerRageCard(ctx, player, GetCurrentIndex(player), triggers);
             
             // Post Card Trigger
+            NorthmanDisplay.ClearCard(player, GetCurrentIndex(player));
             NorthmanModel.currentIndex.Set(player,  GetCurrentIndex(player)+1);
         }
         
@@ -151,7 +151,7 @@ public class NorthmanCmd
         return;
     }
 
-    public static async Task TriggerRageCard(PlayerChoiceContext ctx, Player player, int index, int triggers)
+    private static async Task TriggerRageCard(PlayerChoiceContext ctx, Player player, int index, int triggers)
     {
         if (!GetRaging(player)) return;
         List<CardModel>? snapshot = GetSnapshot(player);

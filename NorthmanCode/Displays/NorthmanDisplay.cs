@@ -25,6 +25,15 @@ public class NorthmanDisplay
         else
             Displays.Remove(creature);
     }
+    
+    public static void ClearCard(Player creature, int index)
+    {
+        var display = Displays.GetValueOrDefault(creature);
+        if (GodotObject.IsInstanceValid(display))
+            display!.ClearCard(index);
+        else
+            Displays.Remove(creature);
+    }
 
     public static void Register(Player creature, NRageQueueDisplay display)
     {

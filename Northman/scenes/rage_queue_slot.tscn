@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://8hww7gfqjj0x"]
 
-[ext_resource type="Texture2D" uid="uid://w2fvhydnoumu" path="res://Northman/images/orbs/empty_orb.png" id="1_vv4fg"]
+[ext_resource type="Texture2D" uid="uid://cfphpmicm8n7d" path="res://Northman/images/ui/anger_small.png" id="2_dxlxm"]
 [ext_resource type="Script" uid="uid://kf6whtjrpbax" path="res://NorthmanCode/Vfx/NRageQueueSlot.cs" id="2_vv4fg"]
 
 [sub_resource type="Animation" id="Animation_uouql"]
@@ -76,16 +76,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.467293
-offset_bottom = 50.467293
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.535, 0.535)
-pivot_offset = Vector2(50, 50)
+scale = Vector2(0.16911411, 0.16911411)
+pivot_offset = Vector2(128, 128)
 mouse_filter = 2
-texture = ExtResource("1_vv4fg")
+texture = ExtResource("2_dxlxm")
 stretch_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

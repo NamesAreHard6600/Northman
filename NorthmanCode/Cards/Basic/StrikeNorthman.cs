@@ -14,12 +14,13 @@ public class StrikeNorthman : NorthmanCard
 {
     public StrikeNorthman() : base(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
     {
+        WithAnger(1);
         WithDamage(3, 2);
         WithTags(CardTag.Strike);
         WithRageCard();
         
         this.WithCardTip<StrikeNorthmanRageCard>();
-        WithAnger(1);
+        
     }
 
     protected override async Task OnPlay(

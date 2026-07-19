@@ -1,4 +1,4 @@
 {
-  "NORTHMAN_SECONDARY_RESOURCE_ANGER.description": "A special resource that manages your Anger. When you reach 5 Anger, the Rage Queue triggers and you reset back to 0.",
+  "NORTHMAN_SECONDARY_RESOURCE_ANGER.description": "A special resource that manages your [color=red]Anger[/color]. When you reach 5 [color=red]Anger[/color], the [color=red]Rage Queue[/color] triggers and you reset back to 0.",
   "NORTHMAN_SECONDARY_RESOURCE_ANGER.title": "Anger"
 }

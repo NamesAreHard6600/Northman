@@ -1,16 +1,14 @@
 {
-  "NORTHMAN-STRIKE_NORTHMAN.description": "Deal {Damage:diff()} Damage.\n[color=red]Rage: Deal {Damage:diff()} Damage.[/color]",
-  "NORTHMAN-STRIKE_NORTHMAN.title": "Strike",
-  "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.description": "Deal {Damage:diff()} Damage.",
-  "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.title": "Strike",
-  
-    
-  
   "NORTHMAN-TEMPLATE_CARD.description": "This card is just a strike but won't exist later",
   "NORTHMAN-TEMPLATE_CARD.title": "Template Card",
   
+  "NORTHMAN-STRIKE_NORTHMAN.description": "Deal {Damage:diff()} Damage.\n[color=red]Rage: Deal {Damage:diff()} Damage.[/color]",
+  "NORTHMAN-STRIKE_NORTHMAN.title": "Strike",
+  "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} Damage.[/font_size]",
+  "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.title": "Strike",
+  
   "NORTHMAN-INVOKE_TEST_CARD.description": "[color=red]Rage: Invoke {Invoke:diff()}.[/color]",
   "NORTHMAN-INVOKE_TEST_CARD.title": "Invoke Test",
-  "NORTHMAN-INVOKE_TEST_RAGE_CARD.description": "[gold]Invoke[/gold] {Invoke:diff()}",
+  "NORTHMAN-INVOKE_TEST_RAGE_CARD.description": "[font_size=30][gold]Invoke[/gold] {Invoke:diff()}[/font_size]",
   "NORTHMAN-INVOKE_TEST_RAGE_CARD.title": "Invoke Test"
 }

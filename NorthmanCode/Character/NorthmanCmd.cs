@@ -8,11 +8,14 @@ using MegaCrit.Sts2.Core.Models;
 using Northman.NorthmanCode.Cards;
 using Northman.NorthmanCode.Displays;
 using Northman.NorthmanCode.Piles;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace Northman.NorthmanCode.Character;
 
 public class NorthmanCmd
 {
+    internal static readonly String ResourceId = "NORTHMAN_SECONDARY_RESOURCE_ANGER";
+    
     public static int GetSlotSize(Player player)
     {
         if (GetRaging(player))
@@ -33,7 +36,7 @@ public class NorthmanCmd
 
     public static int GetAnger(Player player)
     {
-        return NorthmanModel.AngerAmount.Get(player);
+        return SecondaryResourceCmd.Get(player, ResourceId);
     }
     
     public static int GetAngerMax(Player player)
@@ -76,6 +79,11 @@ public class NorthmanCmd
         return index < GetSlotSize(player);
     }
 
+    public static void SetAngerAmount(Player player, int amount)
+    {
+        SecondaryResourceCmd.Set(player, ResourceId, amount);
+    }
+
     public static Task ResetRageQueue(PlayerChoiceContext ctx,
         Player player)
     {
@@ -83,18 +91,8 @@ public class NorthmanCmd
         if (pile == null) return Task.CompletedTask;
         pile.Clear();
         // To lazy to make a setter
-        NorthmanModel.AngerAmount.Set(player, 0);
+        SetAngerAmount(player, 0);
         NorthmanDisplay.Refresh(player);
-        return Task.CompletedTask;
-    }
-
-    public static Task AdjustAnger(Player player, int anger)
-    {
-        MainFile.Logger.Info("Gaining anger " + anger);
-        int newAnger = NorthmanModel.AngerAmount.Get(player) + anger;
-        newAnger = Math.Min(GetAngerMax(player), Math.Max(0, newAnger));
-        MainFile.Logger.Info("Setting new anger " + newAnger);
-        NorthmanModel.AngerAmount.Set(player, newAnger);
         return Task.CompletedTask;
     }
     

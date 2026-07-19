@@ -11,6 +11,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using Northman.NorthmanCode.CustomEnums;
+using Northman.NorthmanCode.SecondaryResource;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace Northman.NorthmanCode.Cards;
 
@@ -37,6 +39,8 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     
+    internal static readonly String ResourceId = "NORTHMAN_SECONDARY_RESOURCE_ANGER";
+    
     protected NorthmanCard WithRageCard()
     {
         this.WithKeyword(NorthmanKeyword.Rage);
@@ -50,10 +54,16 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
         return this;
     }
 
-    protected NorthmanCard WithAnger(int anger, int upgrade = 0)
+    // Currently does not support upgrades changing anger amount
+    // Sets two different values (With Var "Anger" and SecondaryResourceUses because I can't for the life of 
+    // me access the original cost. If I can figure that out I can change this, I shouldn't have to access it cost
+    // in too many places. I suppose this is how negative anger will work anyway
+    protected NorthmanCard WithAnger(int anger)
     {
-        this.WithKeyword(NorthmanKeyword.Anger);
-        WithVar("Anger", anger, upgrade);
+        WithKeyword(NorthmanKeyword.Anger);
+        WithVar("Anger", anger);
+        if (anger > 0) 
+            this.SecondaryResourceUses().SpendIfAvailable("anger", AngerResource.Id, 1);
         return this;
     }
 
@@ -74,6 +84,11 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
     protected async Task AdjustAnger(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         var player = cardPlay.Player;
-        await NorthmanCmd.AdjustAnger(player, DynamicVars["Anger"].IntValue);
+        
+        // Give anger amount
+        await SecondaryResourceCmd.Gain(player, ResourceId, cardPlay.Card.DynamicVars["Anger"].IntValue);
+        // Add back any accidental spent resource
+        await SecondaryResourceCmd.Gain(player, ResourceId, cardPlay.SecondaryResources().Spent(ResourceId));
+        // Lock to maximum would go here if needed
     }
 }

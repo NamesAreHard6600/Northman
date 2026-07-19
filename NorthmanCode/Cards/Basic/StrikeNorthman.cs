@@ -17,12 +17,9 @@ public class StrikeNorthman : NorthmanCard
         WithDamage(3, 2);
         WithTags(CardTag.Strike);
         WithRageCard();
-        WithAnger(1);
-        
-        this.SecondaryResourceUses().SpendIfAvailable("anger", AngerResource.Id, 1);
         
         this.WithCardTip<StrikeNorthmanRageCard>();
-
+        WithAnger(1);
     }
 
     protected override async Task OnPlay(

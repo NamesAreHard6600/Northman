@@ -10,14 +10,15 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using Northman.NorthmanCode.Cards;
 using Northman.NorthmanCode.Displays;
 using Northman.NorthmanCode.Piles;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace Northman.NorthmanCode.Character;
 
-public class NorthmanModel(): CustomSingletonModel(HookType.Combat)
+public class NorthmanModel(): CustomSingletonModel(HookType.Combat), ISecondaryResourceHookListener 
 {
     // internal static readonly SpireField<Player, RageQueuePile> RageQueue = new(() => null);
-    
-    internal static readonly SpireField<Player, int> AngerAmount = new(() => 0);
+    // Anger amount now handled by Secondary Resource
+    //internal static readonly SpireField<Player, int> AngerAmount = new(() => 0);
     internal static readonly SpireField<Player, int> RageQueueSlots = new(() => -1);
     
     // Rage queue info for public access
@@ -26,6 +27,8 @@ public class NorthmanModel(): CustomSingletonModel(HookType.Combat)
     internal static readonly SpireField<Player, List<CardModel>> snapshot = new(() =>
         []);
     internal static readonly SpireField<Player, int> invoke = new(() => 0);
+
+    internal static readonly String ResourceId = "NORTHMAN_SECONDARY_RESOURCE_ANGER";
     
     internal static void SetupNorthmanUi(CombatState state)
     {
@@ -66,4 +69,22 @@ public class NorthmanModel(): CustomSingletonModel(HookType.Combat)
             await NorthmanCmd.TriggerRageQueue(ctx, player);
         }
     }
+
+    /*
+    // Handled by the card itself
+    public async Task AfterSecondaryResourceSpent(SecondaryResourceSpendContext context)
+    {
+        if (context.Definition.Id == ResourceId)
+        {
+            MainFile.Logger.Info("Resource was spent, giving it back: " + context.Amount);
+            await SecondaryResourceCmd.Gain(context.Player, ResourceId, context.Amount, source: context.Card);
+        }
+    }
+
+    public SecondaryResourceInsufficientPayment ModifySecondaryResourceInsufficientPayment(
+        SecondaryResourceInsufficientPaymentContext context, SecondaryResourceInsufficientPayment payment)
+    {
+        payment.AllowsPlay = true;
+    }*/
+    
 }

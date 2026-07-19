@@ -29,6 +29,7 @@ public class AngerResource
             largeIconPath: "res://Northman/images/ui/anger_large.png"));
 
         Id = Definition.Id;
+        MainFile.Logger.Info(Definition.Id);
 
         resources.RegisterCombatUi(
             "anger_combat_counter",

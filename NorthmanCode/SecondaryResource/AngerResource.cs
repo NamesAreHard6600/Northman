@@ -22,7 +22,7 @@ public class AngerResource
 
         Definition = resources.Register("anger", new SecondaryResourceDefinition(
             defaultAmount: 0,
-            baseMaxAmount: 5,
+            baseMaxAmount: null,
             turnStartPolicy: SecondaryResourceTurnStartPolicy.None,
             persistencePolicy: SecondaryResourcePersistencePolicy.Combat,
             smallIconPath: "res://Northman/images/ui/anger_small.png",

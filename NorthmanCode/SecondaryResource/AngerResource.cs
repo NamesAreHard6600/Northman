@@ -41,7 +41,7 @@ public class AngerResource
                     {
                         FontSize = 36,
                         OutlineSize = 18,
-                        AmountLabelOffset = new Vector2(0, 0),
+                        AmountLabelOffset = new Vector2(3, 3),
                         FormatAmount = (amount, max) => amount.ToString(),
                         CounterSize = new Vector2(96, 96),
                         IconSize = new Vector2(90, 90),

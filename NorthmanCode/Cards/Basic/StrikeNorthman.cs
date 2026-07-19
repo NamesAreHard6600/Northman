@@ -1,7 +1,10 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Models.Cards;
 using Northman.NorthmanCode.Extensions;
+using Northman.NorthmanCode.SecondaryResource;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace Northman.NorthmanCode.Cards.Basic;
 
@@ -16,7 +19,10 @@ public class StrikeNorthman : NorthmanCard
         WithRageCard();
         WithAnger(1);
         
+        this.SecondaryResourceUses().SpendIfAvailable("anger", AngerResource.Id, 1);
+        
         this.WithCardTip<StrikeNorthmanRageCard>();
+
     }
 
     protected override async Task OnPlay(

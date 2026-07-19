@@ -62,4 +62,6 @@ public class NorthmanDisplay
 
         Register(player, display);
     }
+    
+    
 }

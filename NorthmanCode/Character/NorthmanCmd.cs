@@ -116,7 +116,7 @@ public class NorthmanCmd
         NorthmanDisplay.Refresh(creature);
         MainFile.Logger.Info("Display Updated");
     }
-
+    
     public static async Task TriggerRageQueue(PlayerChoiceContext ctx, Player player)
     {
         var pile = CustomPiles.GetCustomPile(player.PlayerCombatState, RageQueuePile.RageQueue);

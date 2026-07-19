@@ -63,7 +63,7 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
         WithKeyword(NorthmanKeyword.Anger);
         WithVar("Anger", anger);
         if (anger > 0) 
-            this.SecondaryResourceUses().SpendIfAvailable("anger", AngerResource.Id, 1);
+            this.SecondaryResourceUses().SpendIfAvailable("anger", AngerResource.Id, anger);
         return this;
     }
 
@@ -87,8 +87,6 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
         
         // Give anger amount
         await SecondaryResourceCmd.Gain(player, ResourceId, cardPlay.Card.DynamicVars["Anger"].IntValue);
-        // Add back any accidental spent resource
-        await SecondaryResourceCmd.Gain(player, ResourceId, cardPlay.SecondaryResources().Spent(ResourceId));
         // Lock to maximum would go here if needed
     }
 }

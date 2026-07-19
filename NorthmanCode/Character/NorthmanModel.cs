@@ -69,7 +69,27 @@ public class NorthmanModel(): CustomSingletonModel(HookType.Combat), ISecondaryR
             await NorthmanCmd.TriggerRageQueue(ctx, player);
         }
     }
+    
+    public bool ShouldSpendSecondaryResource(SecondaryResourceSpendContext context)
+    {
+        // Block Spending Resource for all Anger Cards
+        // Any cards that remove anger will need to go through Lose and not Spend
+        return context.Definition.Id != ResourceId;
+    }
+    
+    /*
+    public SecondaryResourceInsufficientPayment ModifySecondaryResourceInsufficientPayment(
+        SecondaryResourceInsufficientPaymentContext context,
+        SecondaryResourceInsufficientPayment payment)
 
+    {
+        if (context.Definition.Id == ResourceId && !payment.AllowsPlay)
+        {
+            return SecondaryResourceInsufficientPayment.AllowPlay();
+        }
+
+        return payment;
+    }
     /*
     // Handled by the card itself
     public async Task AfterSecondaryResourceSpent(SecondaryResourceSpendContext context)

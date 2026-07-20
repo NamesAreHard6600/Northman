@@ -35,6 +35,7 @@ public class Northman : PlaceholderCharacterModel
         ModelDb.Card<DefendIronclad>(),
         ModelDb.Card<DefendIronclad>(),
         ModelDb.Card<LetItOut>(),
+        ModelDb.Card<Prepare>(),
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>

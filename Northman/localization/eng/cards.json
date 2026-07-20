@@ -2,6 +2,7 @@
   "NORTHMAN-TEMPLATE_CARD.description": "This card is just a strike but won't exist later",
   "NORTHMAN-TEMPLATE_CARD.title": "Template Card",
   
+  
   "NORTHMAN-STRIKE_NORTHMAN.description": "Deal {Damage:diff()} Damage.\n[color=red]Rage: Deal {Damage:diff()} Damage.[/color]",
   "NORTHMAN-STRIKE_NORTHMAN.title": "Strike",
   "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} Damage.[/font_size]",
@@ -13,5 +14,10 @@
   "NORTHMAN-INVOKE_TEST_RAGE_CARD.title": "Invoke Test",
 
   "NORTHMAN-LET_IT_OUT.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 1)}.\n Deal {Damage:diff()} Damage.",
-  "NORTHMAN-LET_IT_OUT.title": "Let it Out"
+  "NORTHMAN-LET_IT_OUT.title": "Let it Out",
+
+  "NORTHMAN-PREPARE.description": "[color=red]Rage: Gain {Block:diff()} Block.\n Invoke {Invoke:diff()}.[/color]",
+  "NORTHMAN-PREPARE.title": "Prepare",
+  "NORTHMAN-PREPARE_RAGE_CARD.description": "Gain {Block:diff()} Block.\n Invoke {Invoke:diff()}.",
+  "NORTHMAN-PREPARE_RAGE_CARD.title": "Prepare"
 }

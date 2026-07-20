@@ -1,11 +1,8 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Models.Cards;
 using Northman.NorthmanCode.Extensions;
-using Northman.NorthmanCode.SecondaryResource;
-using STS2RitsuLib.Combat.SecondaryResources;
+
 
 namespace Northman.NorthmanCode.Cards.Basic;
 

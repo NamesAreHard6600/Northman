@@ -13,7 +13,7 @@ namespace Northman.NorthmanCode.SecondaryResource;
 
 public class AngerResource
 {
-    public static SecondaryResourceDefinition Definition { get; private set; } = null!;
+    private static SecondaryResourceDefinition Definition { get; set; } = null!;
     public static string Id { get; private set; } = string.Empty;
 
     public static void Register()
@@ -42,7 +42,7 @@ public class AngerResource
                         FontSize = 36,
                         OutlineSize = 18,
                         AmountLabelOffset = new Vector2(3, 3),
-                        FormatAmount = (amount, max) => amount.ToString(),
+                        FormatAmount = (amount, _) => amount.ToString(),
                         CounterSize = new Vector2(96, 96),
                         IconSize = new Vector2(90, 90),
                         IconStyle = SecondaryResourceIconStyle.Default with

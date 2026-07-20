@@ -13,7 +13,7 @@ namespace Northman.NorthmanCode.Character;
 
 public class NorthmanCmd
 {
-    internal static readonly String ResourceId = "NORTHMAN_SECONDARY_RESOURCE_ANGER";
+    private const string ResourceId = "NORTHMAN_SECONDARY_RESOURCE_ANGER";
     
     public static int GetSlotSize(Player player)
     {
@@ -55,22 +55,22 @@ public class NorthmanCmd
 
     public static bool GetRaging(Player player)
     {
-        return NorthmanModel.raging.Get(player);
+        return NorthmanModel.Raging.Get(player);
     }
 
     public static List<CardModel>? GetSnapshot(Player player)
     {
-        return GetRaging(player) ? NorthmanModel.snapshot.Get(player) : [];
+        return GetRaging(player) ? NorthmanModel.Snapshot.Get(player) : [];
     }
     
     public static int GetCurrentIndex(Player player)
     {
-        return GetRaging(player) ? NorthmanModel.currentIndex.Get(player) : -1;
+        return GetRaging(player) ? NorthmanModel.CurrentIndex.Get(player) : -1;
     }
 
     public static int GetInvoke(Player player)
     {
-        return NorthmanModel.invoke.Get(player);
+        return NorthmanModel.Invoke.Get(player);
     }
     
     public static bool IsIndexInRange(Player player, int index)
@@ -120,10 +120,10 @@ public class NorthmanCmd
         if (pile == null) return;
         var snapshot = pile.Cards.ToList();
         
-        NorthmanModel.raging.Set(player, true);
-        NorthmanModel.currentIndex.Set(player, 0);
-        NorthmanModel.snapshot.Set(player, snapshot);
-        NorthmanModel.invoke.Set(player, 0);
+        NorthmanModel.Raging.Set(player, true);
+        NorthmanModel.CurrentIndex.Set(player, 0);
+        NorthmanModel.Snapshot.Set(player, snapshot);
+        NorthmanModel.Invoke.Set(player, 0);
         await ResetRageQueue(ctx, player);
         
         MainFile.Logger.Info(GetCurrentIndex(player).ToString());
@@ -134,7 +134,7 @@ public class NorthmanCmd
         while (IsIndexInRange(player, GetCurrentIndex(player))) {
             // Pre Card Trigger
             int triggers = GetInvoke(player) + 1;
-            NorthmanModel.invoke.Set(player, 0);
+            NorthmanModel.Invoke.Set(player, 0);
             // NorthmanModel.currentIndex.Set(player, rageIndex);
             
             // Card Trigger
@@ -142,13 +142,12 @@ public class NorthmanCmd
             
             // Post Card Trigger
             NorthmanDisplay.ClearCard(player, GetCurrentIndex(player));
-            NorthmanModel.currentIndex.Set(player,  GetCurrentIndex(player)+1);
+            NorthmanModel.CurrentIndex.Set(player,  GetCurrentIndex(player)+1);
         }
         
         // Post Rage
-        NorthmanModel.raging.Set(player, false);
+        NorthmanModel.Raging.Set(player, false);
         NorthmanDisplay.Refresh(player);
-        return;
     }
 
     private static async Task TriggerRageCard(PlayerChoiceContext ctx, Player player, int index, int triggers)

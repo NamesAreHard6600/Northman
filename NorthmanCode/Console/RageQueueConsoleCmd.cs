@@ -46,7 +46,7 @@ public class RageQueueLogCmd : AbstractConsoleCmd
         if (issuingPlayer == null)
             return new CmdResult(false, "No player context.");
         
-        var ctx = new BlockingPlayerChoiceContext();
+        // var ctx = new BlockingPlayerChoiceContext();
         
         var pile = CustomPiles.GetCustomPile(issuingPlayer.PlayerCombatState, RageQueuePile.RageQueue);
         var size = NorthmanCmd.GetSlotSize(issuingPlayer);

@@ -89,7 +89,7 @@ public partial class NRageQueueDisplay : Control
     }
 
     // Changed to internal
-    internal Vector2 GetSlotGlobalPosition(int index)
+    public Vector2 GetSlotGlobalPosition(int index)
     {
         var clamped = Math.Clamp(index, 0, _currentMax - 1);
         return clamped < _slots.Count ? _slots[clamped].CardAnchorGlobal : GlobalPosition;

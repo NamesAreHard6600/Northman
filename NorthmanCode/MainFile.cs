@@ -2,14 +2,11 @@ using System.Reflection;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
-using MegaCrit.Sts2.Core.Models.Cards;
 //using Northman.NorthmanCode.Localization;
 using Northman.NorthmanCode.Utils;
 using Northman.NorthmanCode.Character;
 using Northman.NorthmanCode.SecondaryResource;
 using Northman.NorthmanCode.Vfx;
-using STS2RitsuLib;
-using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace Northman.NorthmanCode;
 

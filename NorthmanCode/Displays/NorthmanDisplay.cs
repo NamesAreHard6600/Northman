@@ -21,7 +21,7 @@ public class NorthmanDisplay
     {
         var display = Displays.GetValueOrDefault(creature);
         if (GodotObject.IsInstanceValid(display))
-            display!.Refresh();
+            display.Refresh();
         else
             Displays.Remove(creature);
     }
@@ -30,12 +30,12 @@ public class NorthmanDisplay
     {
         var display = Displays.GetValueOrDefault(creature);
         if (GodotObject.IsInstanceValid(display))
-            display!.ClearCard(index);
+            display.ClearCard(index);
         else
             Displays.Remove(creature);
     }
 
-    public static void Register(Player creature, NRageQueueDisplay display)
+    private static void Register(Player creature, NRageQueueDisplay display)
     {
         if (Displays.TryGetValue(creature, out var old) && GodotObject.IsInstanceValid(old))
             old.QueueFree();
@@ -46,7 +46,7 @@ public class NorthmanDisplay
     public static NCard? GetNCard(CardModel card)
     {
         var display = Displays.GetValueOrDefault(card.Owner);
-        return GodotObject.IsInstanceValid(display) ? display!.GetNCard(card) : null;
+        return GodotObject.IsInstanceValid(display) ? display.GetNCard(card) : null;
     }
 
     public static Vector2? GetPosition(CardModel model)

@@ -7,8 +7,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Relics;
 using Northman.NorthmanCode.Cards.Basic;
-using Northman.NorthmanCode.Cards.Testing;
-
 
 namespace Northman.NorthmanCode.Character;
 
@@ -47,7 +45,7 @@ public class Northman : PlaceholderCharacterModel
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<NorthmanRelicPool>();
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<NorthmanPotionPool>();
 
-    /*  PlaceholderCharacterModel will utilize placeholder basegame assets for most of your character assets until you
+    /*  PlaceholderCharacterModel will utilize placeholder base game assets for most of your character assets until you
         override all the other methods that define those assets.
         These are just some of the simplest assets, given some placeholders to differentiate your character with.
         You don't have to, but you're suggested to rename these images. */

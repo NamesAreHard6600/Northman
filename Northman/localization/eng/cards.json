@@ -1,8 +1,4 @@
 {
-  "NORTHMAN-TEMPLATE_CARD.description": "This card is just a strike but won't exist later",
-  "NORTHMAN-TEMPLATE_CARD.title": "Template Card",
-  
-  
   "NORTHMAN-STRIKE_NORTHMAN.description": "Deal {Damage:diff()} Damage.\n[color=red]Rage: Deal {Damage:diff()} Damage.[/color]",
   "NORTHMAN-STRIKE_NORTHMAN.title": "Strike",
   "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} Damage.[/font_size]",

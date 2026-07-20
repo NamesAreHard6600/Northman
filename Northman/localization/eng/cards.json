@@ -15,5 +15,12 @@
   "NORTHMAN-PREPARE.description": "[color=red]Rage: Gain {Block:diff()} Block.\n Invoke {Invoke:diff()}.[/color]",
   "NORTHMAN-PREPARE.title": "Prepare",
   "NORTHMAN-PREPARE_RAGE_CARD.description": "Gain {Block:diff()} Block.\n Invoke {Invoke:diff()}.",
-  "NORTHMAN-PREPARE_RAGE_CARD.title": "Prepare"
+  "NORTHMAN-PREPARE_RAGE_CARD.title": "Prepare",
+
+
+  "NORTHMAN-GET_ANGRY.description": "Draw 1 Card.",
+  "NORTHMAN-GET_ANGRY.title": "Get Angry",
+
+  "NORTHMAN-CALM_DOWN.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 2)}.\n Draw 1 Card.",
+  "NORTHMAN-CALM_DOWN.title": "Calm Down"
 }

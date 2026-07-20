@@ -5,10 +5,7 @@ using MegaCrit.Sts2.Core.Commands;
 using Northman.NorthmanCode.Character;
 using Northman.NorthmanCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using Northman.NorthmanCode.CustomEnums;
 using Northman.NorthmanCode.SecondaryResource;
@@ -18,7 +15,7 @@ namespace Northman.NorthmanCode.Cards;
 
 /// <summary>
 /// This is the base class for your mod's cards, which is set up to load the card's images from your mod's resources.
-/// When creating a card, right click the Cards folder and create a new file with the Custom Card template.
+/// When creating a card, right-click the Cards folder and create a new file with the Custom Card template.
 /// This will generate a class that extends this one.
 /// You can also just create the class manually; just make sure to inherit from this class.
 /// </summary>
@@ -32,15 +29,15 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
     public override string CustomPortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
 
     //Smaller variants of card images for efficiency:
-    //Smaller variant of fullart: 250x350
-    //Smaller variant of normalart: 250x190
+    //Smaller variant of full art: 250x350
+    //Smaller variant of normal art: 250x190
 
     //Uses card_portraits/card_name.png as image path. These should be smaller images.
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
-    
-    internal static readonly String ResourceId = "NORTHMAN_SECONDARY_RESOURCE_ANGER";
-    
+
+    private const string ResourceId = "NORTHMAN_SECONDARY_RESOURCE_ANGER";
+
     protected NorthmanCard WithRageCard()
     {
         this.WithKeyword(NorthmanKeyword.Rage);
@@ -55,7 +52,7 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
     }
 
     // Currently does not support upgrades changing anger amount
-    // Sets two different values (With Var "Anger" and SecondaryResourceUses because I can't for the life of 
+    // Sets two different values With Var "Anger" and SecondaryResourceUses because I can't for the life of 
     // me access the original cost. If I can figure that out I can change this, I shouldn't have to access it cost
     // in too many places. I suppose this is how negative anger will work anyway
     protected NorthmanCard WithAnger(int anger)
@@ -71,12 +68,16 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
         PlayerChoiceContext ctx,
         CardPlay cardPlay) where T : NorthmanRageCard
     {
-        NorthmanCard source = this;
+        var source = this;
         if (CombatState == null) return;
         
         NorthmanRageCard card = CombatState.CreateCard<T>(cardPlay.Card.Owner);
         if (source.IsUpgraded)
             CardCmd.Upgrade(card);
+
+        var enchantment = source.Enchantment;
+        if (enchantment != null)
+            CardCmd.Enchant((EnchantmentModel)enchantment.ClonePreservingMutability(), card, enchantment.Amount);
         
         await NorthmanCmd.AddCard(ctx, card);
     }

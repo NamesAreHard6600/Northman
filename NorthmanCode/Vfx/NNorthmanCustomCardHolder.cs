@@ -68,6 +68,10 @@ public partial class NNorthmanCustomCardHolder : NCardHolder, IPoolable
 
     public override void _Ready()
     {
+        var anim = GetNode<AnimationPlayer>("AnimationPlayer");
+        anim.Play("idle");
+        anim.Seek((float)GD.RandRange(0, anim.CurrentAnimationLength), true);
+        
         var previewingUpgrade = _isPreviewingUpgrade;
         _isPreviewingUpgrade = false;
         SetIsPreviewingUpgrade(previewingUpgrade);

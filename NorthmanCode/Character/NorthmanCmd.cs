@@ -73,6 +73,11 @@ public class NorthmanCmd
         return NorthmanModel.Invoke.Get(player);
     }
     
+    public static int GetSkip(Player player)
+    {
+        return NorthmanModel.Skip.Get(player);
+    }
+    
     public static bool IsIndexInRange(Player player, int index)
     {
         return index < GetSlotSize(player);
@@ -103,7 +108,7 @@ public class NorthmanCmd
 
         if (pile.Cards.Count >= GetSlotSizeMax(creature))
         {
-            MainFile.Logger.Info("Rage Queue Full. Skipping for now. Later should push out old cards.");
+            MainFile.Logger.Error("Rage Queue Full. Skipping for now. Later it will push out old cards.");
             return;
         }
         
@@ -124,6 +129,7 @@ public class NorthmanCmd
         NorthmanModel.CurrentIndex.Set(player, 0);
         NorthmanModel.Snapshot.Set(player, snapshot);
         NorthmanModel.Invoke.Set(player, 0);
+        NorthmanModel.Skip.Set(player, 0);
         await ResetRageQueue(ctx, player);
         
         MainFile.Logger.Info(GetCurrentIndex(player).ToString());
@@ -133,7 +139,13 @@ public class NorthmanCmd
         
         while (IsIndexInRange(player, GetCurrentIndex(player))) {
             // Pre Card Trigger
-            int triggers = GetInvoke(player) + 1;
+            var triggers = GetInvoke(player) + 1;
+            var skip = GetSkip(player);
+            if (skip > 0)
+            {
+                triggers--;
+                NorthmanModel.Skip.Set(player, skip-1);
+            }
             NorthmanModel.Invoke.Set(player, 0);
             // NorthmanModel.currentIndex.Set(player, rageIndex);
             

@@ -22,5 +22,20 @@
   "NORTHMAN-GET_ANGRY.title": "Get Angry",
 
   "NORTHMAN-CALM_DOWN.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 2)}.\n Draw 1 Card.",
-  "NORTHMAN-CALM_DOWN.title": "Calm Down"
+  "NORTHMAN-CALM_DOWN.title": "Calm Down",
+
+  "NORTHMAN-FURY_STRIKE.description": "Deal {Damage:diff()} Damage.\n[color=red]Rage: Apply {VulnerablePower:diff()} Vulnerable.",
+  "NORTHMAN-FURY_STRIKE.title": "Fury Strike",
+  "NORTHMAN-FURY_STRIKE_RAGE_CARD.description": "[font_size=30]Apply {VulnerablePower:diff()} Vulnerable.[/font_size]",
+  "NORTHMAN-FURY_STRIKE_RAGE_CARD.title": "Fury Strike",
+
+  "NORTHMAN-DUAL_HORNED.description": "Add this card's rage ability to the rage queue twice.\n[color=red]Rage: Deal {Damage:diff()} damage.[/color]",
+  "NORTHMAN-DUAL_HORNED.title": "Dual Horned",
+  "NORTHMAN-DUAL_HORNED_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} Damage.[/font_size]",
+  "NORTHMAN-DUAL_HORNED_RAGE_CARD.title": "Single Horn",
+
+  "NORTHMAN-LOSE_CONTROL.description": "Deal {Damage:diff()} Damage.\n[color=red]Rage: Skip {Skip}.[/color]",
+  "NORTHMAN-LOSE_CONTROL.title": "Lose Control",
+  "NORTHMAN-LOSE_CONTROL_RAGE_CARD.description": "[gold]Skip[/gold] {Skip}.",
+  "NORTHMAN-LOSE_CONTROL_RAGE_CARD.title": "Lost Control"
 }

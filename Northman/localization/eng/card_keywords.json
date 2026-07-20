@@ -5,6 +5,10 @@
   "NORTHMAN-INVOKE.description": "The next card in the [color=red]Rage Queue[/color] triggers X additional times.",
   "NORTHMAN-INVOKE.title": "Invoke X",
 
+  "NORTHMAN-SKIP.description": "The next X cards in the [color=red]Rage Queue[/color] trigger 1 less time.",
+  "NORTHMAN-SKIP.title": "Skip X",
+
   "NORTHMAN-ANGER.description": "This card generates [color=red]Anger[/color]. When you reach 5 [color=red]Anger[/color], the [color=red]Rage Queue[/color] triggers.",
   "NORTHMAN-ANGER.title": "Anger"
+
 }

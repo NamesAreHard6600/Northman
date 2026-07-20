@@ -50,6 +50,13 @@ public abstract class NorthmanCard(int cost, CardType type, CardRarity rarity, T
         WithVar("Invoke", invoke, upgrade);
         return this;
     }
+    
+    protected NorthmanCard WithSkip(int skip, int upgrade = 0)
+    {
+        this.WithKeyword(NorthmanKeyword.Skip);
+        WithVar("Skip", skip, upgrade);
+        return this;
+    }
 
     // Currently does not support upgrades changing anger amount
     // Sets two different values With Var "Anger" and SecondaryResourceUses because I can't for the life of 

@@ -24,6 +24,8 @@ public class NorthmanModel(): CustomSingletonModel(HookType.Combat), ISecondaryR
     internal static readonly SpireField<Player, List<CardModel>> Snapshot = new(() =>
         []);
     internal static readonly SpireField<Player, int> Invoke = new(() => 0);
+    internal static readonly SpireField<Player, int> Skip = new(() => 0);
+
 
     private const string ResourceId = "NORTHMAN_SECONDARY_RESOURCE_ANGER";
     

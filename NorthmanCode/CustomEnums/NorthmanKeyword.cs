@@ -9,8 +9,13 @@ public class NorthmanKeyword
     public static CardKeyword Rage;
     
     [CustomEnum] [KeywordProperties(AutoKeywordPosition.None)]
+    public static CardKeyword Anger;
+    
+    [CustomEnum] [KeywordProperties(AutoKeywordPosition.None)]
     public static CardKeyword Invoke;
     
     [CustomEnum] [KeywordProperties(AutoKeywordPosition.None)]
-    public static CardKeyword Anger;
+    public static CardKeyword Skip;
+    
+    
 }

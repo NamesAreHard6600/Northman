@@ -25,4 +25,13 @@ public abstract class NorthmanRageCard(int cost, CardType type, CardRarity rarit
         NorthmanModel.Invoke.Set(player, NorthmanCmd.GetInvoke(player) + DynamicVars["Invoke"].IntValue);
         return Task.CompletedTask;
     }
+    
+    protected Task Skip(PlayerChoiceContext ctx, CardPlay cardPlay)
+    {
+        Player player = cardPlay.Card.Owner;
+        if (!NorthmanCmd.GetRaging(player)) return Task.CompletedTask;
+
+        NorthmanModel.Skip.Set(player, NorthmanCmd.GetSkip(player) + DynamicVars["Skip"].IntValue);
+        return Task.CompletedTask;
+    }
 }

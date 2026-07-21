@@ -10,7 +10,7 @@ public class LetItOut : NorthmanCard
     public LetItOut() : base(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
     {
         WithAnger(-1);
-        WithDamage(10, 14);
+        WithDamage(10, 4);
     }
 
     protected override async Task OnPlay(

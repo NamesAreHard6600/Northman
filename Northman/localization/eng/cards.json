@@ -24,7 +24,7 @@
   "NORTHMAN-CALM_DOWN.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 2)}.\n Draw 1 card.",
   "NORTHMAN-CALM_DOWN.title": "Calm Down",
 
-  "NORTHMAN-FURY_STRIKE.description": "Deal {Damage:diff()} damage.\n[color=red]Rage: Apply {VulnerablePower:diff()} Vulnerable.",
+  "NORTHMAN-FURY_STRIKE.description": "Deal {Damage:diff()} damage.\n[color=red]Rage: Apply {VulnerablePower:diff()} Vulnerable.[/color]",
   "NORTHMAN-FURY_STRIKE.title": "Fury Strike",
   "NORTHMAN-FURY_STRIKE_RAGE_CARD.description": "[font_size=30]Apply {VulnerablePower:diff()} [gold]Vulnerable[/gold].[/font_size]",
   "NORTHMAN-FURY_STRIKE_RAGE_CARD.title": "Fury Strike",

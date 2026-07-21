@@ -1,7 +1,7 @@
 {
-  "NORTHMAN-STRIKE_NORTHMAN.description": "Deal {Damage:diff()} Damage.\n[color=red]Rage: Deal {Damage:diff()} Damage.[/color]",
+  "NORTHMAN-STRIKE_NORTHMAN.description": "Deal {Damage:diff()} damage.\n[color=red]Rage: Deal {Damage:diff()} damage.[/color]",
   "NORTHMAN-STRIKE_NORTHMAN.title": "Strike",
-  "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} Damage.[/font_size]",
+  "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} damage.[/font_size]",
   "NORTHMAN-STRIKE_NORTHMAN_RAGE_CARD.title": "Strike",
   
   "NORTHMAN-INVOKE_TEST_CARD.description": "[color=red]Rage: Invoke {Invoke:diff()}.[/color]",
@@ -9,33 +9,52 @@
   "NORTHMAN-INVOKE_TEST_RAGE_CARD.description": "[font_size=30][gold]Invoke[/gold] {Invoke:diff()}[/font_size]",
   "NORTHMAN-INVOKE_TEST_RAGE_CARD.title": "Invoke Test",
 
-  "NORTHMAN-LET_IT_OUT.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 1)}.\n Deal {Damage:diff()} Damage.",
+  "NORTHMAN-LET_IT_OUT.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 1)}.\n Deal {Damage:diff()} damage.",
   "NORTHMAN-LET_IT_OUT.title": "Let it Out",
 
   "NORTHMAN-PREPARE.description": "[color=red]Rage: Gain {Block:diff()} Block.\n Invoke {Invoke:diff()}.[/color]",
   "NORTHMAN-PREPARE.title": "Prepare",
-  "NORTHMAN-PREPARE_RAGE_CARD.description": "Gain {Block:diff()} Block.\n Invoke {Invoke:diff()}.",
+  "NORTHMAN-PREPARE_RAGE_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\n Invoke {Invoke:diff()}.",
   "NORTHMAN-PREPARE_RAGE_CARD.title": "Prepare",
 
 
   "NORTHMAN-GET_ANGRY.description": "Draw 1 Card.",
   "NORTHMAN-GET_ANGRY.title": "Get Angry",
 
-  "NORTHMAN-CALM_DOWN.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 2)}.\n Draw 1 Card.",
+  "NORTHMAN-CALM_DOWN.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 2)}.\n Draw 1 card.",
   "NORTHMAN-CALM_DOWN.title": "Calm Down",
 
-  "NORTHMAN-FURY_STRIKE.description": "Deal {Damage:diff()} Damage.\n[color=red]Rage: Apply {VulnerablePower:diff()} Vulnerable.",
+  "NORTHMAN-FURY_STRIKE.description": "Deal {Damage:diff()} damage.\n[color=red]Rage: Apply {VulnerablePower:diff()} Vulnerable.",
   "NORTHMAN-FURY_STRIKE.title": "Fury Strike",
-  "NORTHMAN-FURY_STRIKE_RAGE_CARD.description": "[font_size=30]Apply {VulnerablePower:diff()} Vulnerable.[/font_size]",
+  "NORTHMAN-FURY_STRIKE_RAGE_CARD.description": "[font_size=30]Apply {VulnerablePower:diff()} [gold]Vulnerable[/gold].[/font_size]",
   "NORTHMAN-FURY_STRIKE_RAGE_CARD.title": "Fury Strike",
 
   "NORTHMAN-DUAL_HORNED.description": "Add this card's rage ability to the rage queue twice.\n[color=red]Rage: Deal {Damage:diff()} damage.[/color]",
   "NORTHMAN-DUAL_HORNED.title": "Dual Horned",
-  "NORTHMAN-DUAL_HORNED_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} Damage.[/font_size]",
+  "NORTHMAN-DUAL_HORNED_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} damage.[/font_size]",
   "NORTHMAN-DUAL_HORNED_RAGE_CARD.title": "Single Horn",
 
-  "NORTHMAN-LOSE_CONTROL.description": "Deal {Damage:diff()} Damage.\n[color=red]Rage: Skip {Skip}.[/color]",
+  "NORTHMAN-LOSE_CONTROL.description": "Deal {Damage:diff()} damage.\n[color=red]Rage: Skip {Skip}.[/color]",
   "NORTHMAN-LOSE_CONTROL.title": "Lose Control",
-  "NORTHMAN-LOSE_CONTROL_RAGE_CARD.description": "[gold]Skip[/gold] {Skip}.",
-  "NORTHMAN-LOSE_CONTROL_RAGE_CARD.title": "Lost Control"
+  "NORTHMAN-LOSE_CONTROL_RAGE_CARD.description": "[font_size=30][gold]Skip[/gold] {Skip}.[/font_size]",
+  "NORTHMAN-LOSE_CONTROL_RAGE_CARD.title": "Lost Control",
+
+  "NORTHMAN-PLUNDER.description": "[color=red]Deal {Damage:diff()} damage. Deal {Damage:diff()} damage again if the enemy does not intend to attack.[/color]",
+  "NORTHMAN-PLUNDER.title": "Plunder",
+  "NORTHMAN-PLUNDER_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} damage. Deal {Damage:diff()} damage again if the enemy does not intend to attack.[/font_size]",
+  "NORTHMAN-PLUNDER_RAGE_CARD.title": "Plunder",
+
+  "NORTHMAN-INTIMIDATE.description": "Apply {WeakPower:diff()} [gold]Weak[/gold].\n [color=red]Rage: Apply {RageCardWeak} Weak to yourself.[/color]",
+  "NORTHMAN-INTIMIDATE.title": "Intimidate",
+  "NORTHMAN-INTIMIDATE_RAGE_CARD.description": "[font_size=30]Apply {WeakPower} [gold]Weak[/gold] to yourself.[/font_size]",
+  "NORTHMAN-INTIMIDATE_RAGE_CARD.title": "Intimidated",
+
+  "NORTHMAN-WIND_UP.description": "[color=red]Rage: Rage: Rage: Deal {Damage:diff()} damage to ALL enemies.[/color]",
+  "NORTHMAN-WIND_UP.title": "Wind Up",
+  "NORTHMAN-WIND_UP_RAGE_CARD1.description": "[font_size=30][color=red]Rage: Rage: Deal {Damage:diff()} damage to ALL enemies.[/color][/font_size]",
+  "NORTHMAN-WIND_UP_RAGE_CARD1.title": "Wind Up!",
+  "NORTHMAN-WIND_UP_RAGE_CARD2.description": "[font_size=30][color=red] Rage: Deal {Damage:diff()} damage to ALL enemies.[/color][/font_size]",
+  "NORTHMAN-WIND_UP_RAGE_CARD2.title": "Wind Up!!!",
+  "NORTHMAN-WIND_UP_RAGE_CARD3.description": "[font_size=30]Deal {Damage:diff()} damage to ALL enemies.[/font_size]",
+  "NORTHMAN-WIND_UP_RAGE_CARD3.title": "Wind Up!!!!!"
 }

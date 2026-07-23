@@ -119,7 +119,7 @@ public class NorthmanCmd
         MainFile.Logger.Info("Display Updated");
     }
     
-    public static async Task TriggerRageQueue(PlayerChoiceContext ctx, Player player)
+    public static async Task TriggerRageQueue(PlayerChoiceContext ctx, Player player, bool noReset = false)
     {
         var pile = CustomPiles.GetCustomPile(player.PlayerCombatState, RageQueuePile.RageQueue);
         if (pile == null) return;
@@ -130,7 +130,11 @@ public class NorthmanCmd
         NorthmanModel.Snapshot.Set(player, snapshot);
         NorthmanModel.Invoke.Set(player, 0);
         NorthmanModel.Skip.Set(player, 0);
-        await ResetRageQueue(ctx, player);
+        if (!noReset)
+        {
+            await ResetRageQueue(ctx, player);
+        }
+        
         
         MainFile.Logger.Info(GetCurrentIndex(player).ToString());
         MainFile.Logger.Info(GetSlotSize(player).ToString());

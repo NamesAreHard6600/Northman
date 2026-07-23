@@ -15,13 +15,13 @@
   "NORTHMAN-PREPARE.description": "[color=red]Rage: Gain {Block:diff()} Block.\n Invoke {Invoke:diff()}.[/color]",
   "NORTHMAN-PREPARE.title": "Prepare",
   "NORTHMAN-PREPARE_RAGE_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\n Invoke {Invoke:diff()}.",
-  "NORTHMAN-PREPARE_RAGE_CARD.title": "Prepare",
+  "NORTHMAN-PREPARE_RAGE_CARD.title": "Prepared",
 
 
-  "NORTHMAN-GET_ANGRY.description": "Draw 1 Card.",
+  "NORTHMAN-GET_ANGRY.description": "Draw {Cards} Card.",
   "NORTHMAN-GET_ANGRY.title": "Get Angry",
 
-  "NORTHMAN-CALM_DOWN.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 2)}.\n Draw 1 card.",
+  "NORTHMAN-CALM_DOWN.description": "Lose {secondaryResource:secondaryResourceIcons(anger, 2)}.\n Draw {Cards} card.",
   "NORTHMAN-CALM_DOWN.title": "Calm Down",
 
   "NORTHMAN-FURY_STRIKE.description": "Deal {Damage:diff()} damage.\n[color=red]Rage: Apply {VulnerablePower:diff()} Vulnerable.[/color]",
@@ -49,12 +49,38 @@
   "NORTHMAN-INTIMIDATE_RAGE_CARD.description": "[font_size=30]Apply {WeakPower} [gold]Weak[/gold] to yourself.[/font_size]",
   "NORTHMAN-INTIMIDATE_RAGE_CARD.title": "Intimidated",
 
-  "NORTHMAN-WIND_UP.description": "[color=red]Rage: Rage: Rage: Deal {Damage:diff()} damage to ALL enemies.[/color]",
+  "NORTHMAN-WIND_UP.description": "[color=red]Rage: Rage: Rage: Deal {Damage} damage to ALL enemies.[/color]",
   "NORTHMAN-WIND_UP.title": "Wind Up",
-  "NORTHMAN-WIND_UP_RAGE_CARD1.description": "[font_size=30][color=red]Rage: Rage: Deal {Damage:diff()} damage to ALL enemies.[/color][/font_size]",
+  "NORTHMAN-WIND_UP_RAGE_CARD1.description": "[font_size=30][color=red]Rage: Rage: Deal {Damage} damage to ALL enemies.[/color][/font_size]",
   "NORTHMAN-WIND_UP_RAGE_CARD1.title": "Wind Up!",
-  "NORTHMAN-WIND_UP_RAGE_CARD2.description": "[font_size=30][color=red] Rage: Deal {Damage:diff()} damage to ALL enemies.[/color][/font_size]",
+  "NORTHMAN-WIND_UP_RAGE_CARD2.description": "[font_size=30][color=red] Rage: Deal {Damage} damage to ALL enemies.[/color][/font_size]",
   "NORTHMAN-WIND_UP_RAGE_CARD2.title": "Wind Up!!!",
-  "NORTHMAN-WIND_UP_RAGE_CARD3.description": "[font_size=30]Deal {Damage:diff()} damage to ALL enemies.[/font_size]",
-  "NORTHMAN-WIND_UP_RAGE_CARD3.title": "Wind Up!!!!!"
+  "NORTHMAN-WIND_UP_RAGE_CARD3.description": "[font_size=30]Deal {Damage} damage to ALL enemies.[/font_size]",
+  "NORTHMAN-WIND_UP_RAGE_CARD3.title": "Wind Up!!!!!",
+
+  "NORTHMAN-WIDE_SWING.description": "Deal {Damage:diff()} damage to ALL enemies. [color=red]Rage: Deal {Damage:diff()} damage to ALL enemies.\nLose {HpLoss} HP.[/color]",
+  "NORTHMAN-WIDE_SWING.title": "Wide Swing",
+  "NORTHMAN-WIDE_SWING_RAGE_CARD.description": "[font_size=30]Deal {Damage:diff()} damage to ALL enemies.\nLose {HpLoss} HP.[/font_size]",
+  "NORTHMAN-WIDE_SWING_RAGE_CARD.title": "Wider Swing",
+
+  "NORTHMAN-FALL_BACK.description": "Gain {Block:diff()} [gold]Block[/gold].\nLose {secondaryResource:secondaryResourceIcons(anger, 1)}.",
+  "NORTHMAN-FALL_BACK.title": "Fall Back",
+
+  "NORTHMAN-VIKING.description": "Draw {Cards:diff()} cards.\n[color=red]Rage: Skip {Skip}.[/color]",
+  "NORTHMAN-VIKING.title": "Viking",
+  "NORTHMAN-VIKING_RAGE_CARD.description": "[font_size=30]Skip {Skip}.[/font_size]",
+  "NORTHMAN-VIKING_RAGE_CARD.title": "Viking Back",
+
+  "NORTHMAN-SKJOLDR.description": "[color=red]Rage: Gain {Block:diff()} Block.[/color]",
+  "NORTHMAN-SKJOLDR.title": "Skjöldr",
+  "NORTHMAN-SKJOLDR_RAGE_CARD.description": "[font_size=30]Gain {Block:diff()} [gold]Block[/gold].[/font_size]",
+  "NORTHMAN-SKJOLDR_RAGE_CARD.title": "Skjöldr",
+
+  "NORTHMAN-BATTLECRY.description": "Trigger the [color=red]Rage Queue[/color]. Do not reset it or your [color=red]Anger[/color].",
+  "NORTHMAN-BATTLECRY.title": "Battlecry",
+
+  "NORTHMAN-PRIORITIZE.description": "[color=red]Rage: Invoke {Invoke}.\nSkip {Skip}.[/color]",
+  "NORTHMAN-PRIORITIZE.title": "Prioritize",
+  "NORTHMAN-PRIORITIZE_RAGE_CARD.description": "[font_size=30][gold]Invoke[/gold] {Invoke}.\n[gold]Skip[/gold] {Skip}.[/font_size]",
+  "NORTHMAN-PRIORITIZE_RAGE_CARD.title": "Prioritizing"
 }
